@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicación</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/publicacion.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img class="header-img" src="images/logo.png" alt="Logo de la web">
+                </a>
+            </div>
+            <div class="title-container">
+                <h1>Barrio en Acción</h1>
+                <p>Aquí encontrarás las noticias más relevantes de nuestro barrio</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <label for="chkMenu">&equiv;</label>
+        <input type="checkbox" id="chkMenu">
+
+        <ul>
+            <li>
+                <a href="index.html"><span>Inicio</span><img src="images/icons/home-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="nueva.html"><span>Nueva</span><img src="images/icons/new-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="index.html"><span>Logout</span><img src="images/icons/logout-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="login.html"><span>Login</span><img src="images/icons/login-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="registro.html"><span>Registro</span><img src="images/icons/register-icon.png" alt="home-icon"></a>
+            </li>
+        </ul>
+    </nav>
+    
+    <section>
+        <h2>Vecinos limpian parque central del barrio</h2>
+        <hr>
+        <article class="publish-container">
+            <div class="publish-body">
+                <p class="publish-descrip">
+                    Los vecinos del barrio se han unido para limpiar y embellecer el parque central del barrio. La iniciativa fue liderada por un grupo de jóvenes y participaron personas de todas las edades. Se recolectó basura, se cortó el césped y se repararon algunos juegos infantiles.
+                </p>
+                <p>Ubicación: <a href="buscar.html">Alicante, Alacant</a></p>
+            </div>
+            <hr>
+
+            <div class="publish-info">
+                <div class="user-info">
+                    <img class="sm-icon-height" src="images/icons/svg/user-icon.svg" alt="user icon">
+                    <span>usuario1</span> <br>
+                    <div class="comment-date">
+                        <img class="sm-icon-height" src="images/icons/svg/calendar-icon.svg" alt="icono calendario">
+                        <span>10 de marzo de 2023</span>
+                    </div>
+                </div>
+                <div class="likes-info">
+                    <button class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/like-icon.svg" alt="icono like"> Me gusta (<span class="numLikes">17</span>)</button> <br>
+                    <button class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/dislike-icon.svg" alt="icono dislike"> No me gusta (<span class="numDislikes">2</span>)</button>
+                </div>
+                <div class="comments-info">
+                    <img class="sm-icon-height" src="images/icons/svg/comment-icon.svg" alt="comment icon">
+                    <span class="numComments">7</span> <a href="#comentarios">comentarios</a>
+                </div>
+            </div>
+            <hr>
+            
+            <h2>Fotos:</h2>
+
+            <hr>
+            <div class="publish-imgs">
+                <div class="img-container">
+                    <img src="images/noticias/noticia1.png" title="Ver foto en grande" alt="Foto de publicación 1">
+                    <p>Se pueden ver a los vecinos colaborando en recogida de residuos para la limpieza del parque.</p>
+                </div>
+                <div class="img-container">
+                    <img src="images/noticias/noticia1_2.png" title="Ver foto en grande" alt="Foto de publicación 2">
+                    <p>Vecinos ayudando a replantar en el parque del barrio.</p>
+                </div>
+                <div class="img-container">
+                    <img src="images/noticias/noticia1_3.png" title="Ver foto en grande" alt="Foto de publicación 3">
+                    <p>La mayoría de vecinos del barrio están comprometidos para el buen mantenimiento de sus parques.</p>
+                </div>
+            </div>            
+        </article>
+
+        <h2 id="comentarios">Comentarios:</h2>
+        <hr>
+        <article class="comments">
+            <h3>&nbsp;</h3>
+            <div class="comments-container">
+                <div class="user-comment">
+                    <div class="user-avatar">
+                        <img src="images/avatars/avatar.png" alt="Avatar usuario1">
+                        <p>usuario1</p>
+                    </div>
+                    <div class="comment">
+                        <p>Una excelente noticia que destaca la iniciativa y compromiso de los vecinos del barrio para mejorar su comunidad.</p>
+                        <div class="comment-date">
+                            <img class="md-icon-height" src="images/icons/svg/calendar-icon.svg" alt="icono calendario">
+                            <span>10 de marzo, 9:23h</span>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-comment">
+                    <div class="user-avatar">
+                        <img src="images/avatars/5945891.png" alt="Avatar usuario2">
+                        <p>usuario2</p>
+                    </div>
+                    <div class="comment">
+                        <p>Este es un gran ejemplo de cómo los vecinos pueden tomar medidas para mejorar su entorno local y fomentar un sentido de unidad y pertenencia en la comunidad.</p>
+                        <div class="comment-date">
+                            <img class="md-icon-height" src="images/icons/svg/calendar-icon.svg" alt="icono calendario">
+                            <span>12 de marzo, 9:23h</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-area">
+                <p>Tienes que estar <a href="login.html">logueado</a> para poder dejar un comentario</p>
+                <form>
+                    <label for="comentario">Deja tu comentario...</label>
+                    <br>
+                    <textarea name="comentario" id="comentario" maxlength="250"></textarea>
+                    <input type="submit" value="Enviar">
+                    <input type="reset" value="Limpiar">
+                </form>
+            </div>
+        </article>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <h3 class="about-us"><a href="acerca.html">Acerca de nosotros...</a></h3>
+  
+            <p class="copyright-text">Copyright &copy;2023 All Rights Reserved by <em>Sergio Pernas and Fernando Ortega</em>.</p>
+            <div style="clear: both"></div>
+        </div>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva noticia</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/nueva.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img class="header-img" src="images/logo.png" alt="Logo de la web">
+                </a>
+            </div>
+            <div class="title-container">
+                <h1>Barrio en Acción</h1>
+                <p>Aquí encontrarás las noticias más relevantes de nuestro barrio</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <label for="chkMenu">&equiv;</label>
+        <input type="checkbox" id="chkMenu">
+
+        <ul>
+            <li>
+                <a href="index.html"><span>Inicio</span><img src="images/icons/home-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="nueva.html"><span>Nueva</span><img src="images/icons/new-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="index.html"><span>Logout</span><img src="images/icons/logout-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="login.html"><span>Login</span><img src="images/icons/login-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="registro.html"><span>Registro</span><img src="images/icons/register-icon.png" alt="home-icon"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <section>
+        <form id="nuevo">
+            <h2>Añadir nueva noticia</h2>
+            <label for="titulo">Título</label>
+            <input class="newTitle" type="text" id="titulo" name="titulo" maxlength="200" autofocus required>
+      
+            <label for="texto">Texto</label>
+            <textarea class="newText" id="texto" name="texto" required></textarea>
+      
+            <label for="ubicacion">Ubicación</label>
+            <input class="newLoc" type="text" id="ubicacion" name="ubicacion" list="ubicaciones" maxlength="100" required>
+            <datalist id="ubicaciones">
+              <option value="Alicante">
+              <option value="Valencia">
+              <option value="Barcelona">
+              <option value="Burgos">
+            </datalist>
+      
+            <article id="fotos">
+              <h3>Fotos</h3>
+              <div class="foto">
+                <input type="file" accept="image/*" name="foto" id="foto">
+                <label for="foto">
+                    <img src="images/no_foto.jpg" alt="imagen no hay foto">
+                </label>
+                <div class="control-imgs">
+                  <input class="seleccionar-foto" type="file" accept="image/*">
+                  <br>
+                  <div class="add-delete-btn">
+                    <button class="nueva-foto">Añadir foto</button>
+                    <button class="eliminar-foto">Eliminar foto</button>
+                  </div>
+                </div>
+              </div>
+            </article>
+      
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Limpiar">
+          </form>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <h3 class="about-us"><a href="acerca.html">Acerca de nosotros...</a></h3>
+
+            <p class="copyright-text">Copyright &copy;2023 All Rights Reserved by <em>Sergio Pernas and Fernando
+                    Ortega</em>.</p>
+            <div style="clear: both"></div>
+        </div>
+    </footer>
+</body>
+
+</html>

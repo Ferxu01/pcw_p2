@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img class="header-img" src="images/logo.png" alt="Logo de la web">
+                </a>
+            </div>
+            <div class="title-container">
+                <h1>Barrio en Acción</h1>
+                <p>Aquí encontrarás las noticias más relevantes de nuestro barrio</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <label for="chkMenu">&equiv;</label>
+        <input type="checkbox" id="chkMenu">
+
+        <ul>
+            <li>
+                <a href="index.html"><span>Inicio</span><img src="images/icons/home-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="search-icon"></a>
+            </li>
+            <li>
+                <a href="nueva.html"><span>Nueva</span><img src="images/icons/new-icon.png" alt="new-icon"></a>
+            </li>
+            <li>
+                <a href="index.html"><span>Logout</span><img src="images/icons/logout-icon.png" alt="logout-icon"></a>
+            </li>
+            <li>
+                <a href="login.html"><span>Login</span><img src="images/icons/login-icon.png" alt="login-icon"></a>
+            </li>
+            <li>
+                <a href="registro.html"><span>Registro</span><img src="images/icons/register-icon.png" alt="register-icon"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <div class="login-div">
+                <form class="login-form" action="registro.html">
+                    <h2>Iniciar sesión</h2>
+                    
+                    <label for="login">Login<br></label>
+                    <input type="text" id="login" name="login" autofocus required><br>
+
+                    <label for="password">Contraseña<br></label>
+                    <input type="password" id="password" name="password" required><br>
+                    <input type="submit" value="Entrar">
+                    <a class="btn-goto-registro" href="registro.html">Regístrate</a>
+                </form>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <h3 class="about-us"><a href="acerca.html">Acerca de nosotros...</a></h3>
+
+            <p class="copyright-text">Copyright &copy;2023 All Rights Reserved by <em>Sergio Pernas and Fernando
+                    Ortega</em>.
+            </p>
+        </div>
+    </footer>
+</body>
+
+</html>

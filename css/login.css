@@ -1,0 +1,49 @@
+div.login-div {
+    padding: 20px;
+    line-height: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-form > h2 {
+    text-align: center;
+}
+
+.btn-goto-registro {
+    display: inline-block;
+    width: 80px;
+    height: 35px;
+    font-size: 15px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #008CBA;
+    border: 2px solid #008CBA;
+    color: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+.btn-goto-registro:hover {
+    background-color: #024157;
+    cursor: pointer;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 90%;
+    height: 30px;
+    padding: 0px 10px;
+    border-radius: 10em;
+    background-color: #fff;
+    color: #000;
+}
+
+input#text {
+    margin-bottom: 1em;
+}
+
+@media (min-width: 480px) {
+    body {
+        margin: 0 auto;
+    }
+}

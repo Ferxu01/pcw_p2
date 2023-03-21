@@ -1,0 +1,108 @@
+section h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 0 0 15px 20px;
+    padding-top: 30px;
+}
+
+#notices {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 30px;
+    justify-content: space-evenly;
+}
+
+.notice-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    padding-bottom: 10px;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.notice-title > a {
+    text-decoration: none;
+    color: #000;
+}
+
+.notice-container {
+    width: 90%;
+    padding: 20px 0 0 20px;
+    margin-bottom: 10px;
+}
+
+.notice-container > a > img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.notice-container > a > img:hover {
+    border: 2px solid lightcyan;
+}
+
+.info > .notice-date {
+    float: right;
+    width: 125px;
+}
+
+.username {
+    width: 70px;
+}
+
+.notice-date > p {
+    margin-right: 5px;
+}
+
+.notice-date > p, .username > p {
+    float: right;
+}
+
+.small-icon-1 {
+    width: 12px;
+}
+
+.small-icon-2 {
+    width: 15px;
+}
+
+#pagination {
+    background-color: #ADD8E6;
+}
+
+article p,
+article h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+#pagination p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.center-pagination {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.btn-pagination {
+    margin: 0 2px;
+    padding: 5px;
+}
+
+@media (min-width: 480px) {
+    .notice-container {
+        width: 45%;
+    }
+}
+
+@media (min-width: 760px) {
+    .notice-container {
+        width: 30%;
+    }
+}

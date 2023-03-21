@@ -1,0 +1,63 @@
+.register-div {
+    line-height: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.form-div {
+    margin-left: 20px;
+    padding: 5px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: 90%;
+    height: 30px;
+    padding: 0px 10px;
+    border-radius: 10em;
+    color: #000;
+}
+
+input[type="file"]:not(.examinar){
+    display: none;
+}
+
+.image-div {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.image-div img {
+    display: block;
+    border: 10px ridge;
+    padding: 2px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+div.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+div.buttons button{
+    margin: auto;
+}
+
+@media (min-width: 480px) {
+    .image-div {
+        margin: auto;
+    }
+}
+
+@media (min-width: 760px) {
+    div.register-div {
+        flex-direction: row;
+    }
+
+    .form-div {
+        width: 50%;
+    }
+}

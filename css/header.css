@@ -1,0 +1,88 @@
+@font-face {
+    font-family: Poppins;
+    src: url('../fonts/Poppins/Poppins-ExtraLight.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-width: 380px;
+    min-height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+hr {
+    margin: 0 10px;
+}
+
+section {
+    background-color: #ADD8E6;
+}
+
+header {
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.logo-container {
+    margin-right: 15px;
+}
+
+.title-container {
+    line-height: 30px;
+}
+
+.title-container > h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 24px;
+}
+
+.title-container > p {
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.title-container > * {
+    text-align: center;
+}
+
+.title-container > p {
+    display: block;
+}
+
+.header-img {
+    width: 175px;
+}
+
+@media (min-width: 480px) {
+    .title-container > h1 {
+        font-size: 32px;
+    }
+
+    .title-container > p {
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 760px) {
+    .title-container > h1 {
+        font-size: 35px;
+    }
+
+    .title-container > p {
+        line-height: 40px;
+        font-size: 17px;
+    }
+}

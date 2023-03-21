@@ -1,0 +1,86 @@
+body > nav {
+    background-color: #FFA500;
+    position: sticky;
+    top: 0;
+}
+
+body > nav > ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none; /* Se oculta el elemento */
+}
+
+body > nav > ul > li{
+    text-decoration: none;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 10px 5px 20px;
+    display: block;
+    height: 100%;
+}
+
+body > nav > ul > li > a{
+    display: block;
+    text-decoration: none;
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0 10px 10px 10px;
+}
+
+body > nav > ul > li:hover{
+    background-color: #e59400;
+    color: #fff;
+}
+
+body > nav > label {
+    font-size: 40px;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+#chkMenu{
+    display: none;
+}
+
+#chkMenu:checked + ul {
+    display: block; /* Muestra el desplegable */
+}
+
+@media (min-width: 480px) {
+    body > nav > ul{
+        display: flex;
+    }
+
+    body > nav > ul > li{
+        display: flex; /*Los enlaces quedan con ancho que ocupan y enlace no es amplio*/
+        flex-grow: 1;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    body > nav > ul > li > a {
+        padding: .4em;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    body > nav > ul > li > a > span {
+        display: none;  /*Oculta el texto del enlace del navbar*/
+    }
+
+    body > nav > label[for] {
+        display: none;
+    }
+}
+
+@media (min-width: 760px) {
+    body > nav > ul > li > a > span {
+        display: inline-block;
+    }
+
+    body > nav > ul > li {
+        cursor: pointer;
+    }
+}

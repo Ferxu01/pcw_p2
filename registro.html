@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="css/registro.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <header>
+        <div class="header">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img class="header-img" src="images/logo.png" alt="Logo de la web">
+                </a>
+            </div>
+            <div class="title-container">
+                <h1>Barrio en Acción</h1>
+                <p>Aquí encontrarás las noticias más relevantes de nuestro barrio</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <label for="chkMenu">&equiv;</label>
+        <input type="checkbox" id="chkMenu">
+
+        <ul>
+            <li>
+                <a href="index.html"><span>Inicio</span><img src="images/icons/home-icon.png" alt="home-icon"></a>
+            </li>
+            <li>
+                <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="search-icon"></a>
+            </li>
+            <li>
+                <a href="nueva.html"><span>Nueva</span><img src="images/icons/new-icon.png" alt="new-icon"></a>
+            </li>
+            <li>
+                <a href="index.html"><span>Logout</span><img src="images/icons/logout-icon.png" alt="logout-icon"></a>
+            </li>
+            <li>
+                <a href="login.html"><span>Login</span><img src="images/icons/login-icon.png" alt="login-icon"></a>
+            </li>
+            <li>
+                <a href="registro.html"><span>Registro</span><img src="images/icons/register-icon.png"
+                        alt="register-icon"></a>
+            </li>
+        </ul>
+    </nav>
+
+    <section>
+        <h2>Registro</h2>
+        <hr>
+        <div class="register-div">
+            <div class="form-div">
+                <form>
+                    <label for="name">Nombre</label><br>
+                    <input type="text" id="name" name="name" required><br>
+
+                    <label for="login">Login</label><br>
+                    <input type="text" id="login" name="login" minlength="4" maxlength="20" pattern="[a-zA-Z][a-zA-Z0-9]{3,19}" autofocus required><br>
+                    
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email" required><br>
+
+                    <label for="password">Contraseña</label><br>
+                    <input type="password" id="password" name="password" minlength="4" maxlength="20" pattern="[a-zA-Z0-9._-]{4,20}" required><br>
+
+                    <label for="password2">Confirmar contraseña</label><br>
+                    <input type="password" id="password2" name="password2"><br>
+
+                    <input type="submit" value="Enviar">
+                </form>
+            </div>
+            <div class="image-div">
+                <form>
+                    <label for="file-upload">
+                        <img src="images/empty_picture.png" alt="Upload Image">
+                    </label>
+                    <input id="file-upload" type="file" accept="image/*">
+                </form>
+                <div class="buttons">
+                    <input class="examinar" type="file" accept="image/*" name="foto" id="foto">
+                    <button type="button">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <h3 class="about-us"><a href="acerca.html">Acerca de nosotros...</a></h3>
+
+            <p class="copyright-text">Copyright &copy;2023 All Rights Reserved by <em>Sergio Pernas and Fernando
+                    Ortega</em>.</p>
+            <div style="clear: both"></div>
+        </div>
+    </footer>
+</body>
+
+</html>

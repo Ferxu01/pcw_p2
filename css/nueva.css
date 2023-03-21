@@ -1,0 +1,121 @@
+h2 {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 24px;
+}
+
+section {
+    padding: 20px;
+}
+
+form > label {
+    font-family: Arial, Helvetica, sans-serif;
+}
+  
+label {
+    display: block;
+    font-weight: bold;
+}
+
+#foto { /*Ocultar para poder seleccionar archivo desde la imagen*/
+    display: none;
+}
+
+img {
+    cursor: pointer;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border-color: #008CBA;
+}
+    
+section#fotos {
+    margin-top: 20px;
+}
+
+.foto {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.foto img {
+    display: block;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+}
+        
+.botones-foto {
+    margin-top: 10px;
+    text-align: center;
+}
+        
+button.seleccionar-foto {
+    margin-right: 5px;
+}
+
+.control-imgs {
+    display: flex;
+    flex-direction: column;
+}
+
+div.add-delete-btn {
+    flex: 1 40%;
+}
+
+div.add-delete-btn > button {
+    width: 45%;
+}
+
+.control-imgs > .seleccionar-foto,
+.control-imgs > .add-delete-btn > .eliminar-foto,
+.control-imgs > .add-delete-btn > .nueva-foto {
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.control-imgs > .add-delete-btn > .eliminar-foto,
+.control-imgs > .add-delete-btn > .nueva-foto {
+    background-color: #2dc40f;
+    color: #fff;
+    font-weight: 700;
+}
+
+.control-imgs > .add-delete-btn > .eliminar-foto:hover,
+.control-imgs > .add-delete-btn > .nueva-foto:hover {
+    background-color: #1c750a;
+}
+
+button[type="submit"], button[type="reset"] {
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+button[type="submit"]:hover, button[type="reset"]:hover, button.nueva-foto:hover {
+    background-color: #004D60;
+}
+
+button[type="submit"]:active, button[type="reset"]:active, button.nueva-foto:active {
+    background-color: #00323D;
+}
