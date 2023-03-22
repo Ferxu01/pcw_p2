@@ -1,0 +1,73 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+# Ruta completa desde htdocs hasta la carpeta "api".
+# Si el path hasta la carpeta es C:\xampp\htdocs\practica2\api,
+# habría que poner lo siguiente: RewriteBase /practica2/api/
+RewriteBase /pcw/practica2/api/
+
+##################################################
+### REGLAS PARA USUARIO
+##################################################
+### PREGUNTAR DISPONIBILIDAD DE LOGIN
+# Regla que redirige a api/get/usuarios.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios(.*)$ get/usuarios.php?prm=$1&%{QUERY_STRING} [L]
+
+### HACER LOGIN
+# Regla que redirige a api/post/usuarios/login.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/login$ post/usuarios/login.php [L]
+
+### HACER LOGOUT
+# Regla que redirige a api/post/usuarios/logout.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/logout$ post/usuarios/logout.php [L]
+
+### HACER REGISTRO
+# Regla que redirige a api/post/usuarios/registro.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^usuarios/registro$ post/usuarios/registro.php [L]
+
+##################################################
+### REGLAS PARA PUBLICACIONES
+##################################################
+### PEDIR INFORMACIÓN SOBRE PUBLICACIONES
+# Regla que redirige a api/get/publicaciones.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^publicaciones(.*)$ get/publicaciones.php?_rec_=$1&%{QUERY_STRING} [L]
+
+### DAR DE ALTA UNA PUBLICACIÓN O DEJAR UN COMENTARIO
+# Regla que redirige a api/post/publicaciones.php
+# Con esta línea de abajo, sólo acepta peticiones POST
+RewriteCond %{THE_REQUEST} ^POST
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^publicaciones(.*)$ post/publicaciones.php?prm=$1&%{QUERY_STRING} [L]
+
+##################################################
+### REGLAS PARA ZONAS
+##################################################
+### PEDIR INFORMACIÓN SOBRE ZONAS
+# Regla que redirige a api/get/zonas.php
+# Con esta línea de abajo, sólo acepta peticiones GET
+
+RewriteCond %{THE_REQUEST} ^GET
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^zonas(.*)$ get/zonas.php?_rec_=$1&%{QUERY_STRING} [L]
