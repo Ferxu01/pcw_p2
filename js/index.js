@@ -1,5 +1,8 @@
 
 document.addEventListener('DOMContentLoaded', async () => {
+    /*const datos = await postLogin({ login: 'fernando', pwd: 1234});
+    console.warn(datos);*/
+
     const publicaciones = await getPublicaciones();
 
     const divPubs = document.getElementById('notices');
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         header.appendChild(headerLink);
 
         const imgLink = document.createElement('a');
-        imgLink.href = 'enlace de publicacion';        
+        imgLink.href = `publicacion.html?id=${pub.id}`;
 
         const pubImg = document.createElement('img');
         pubImg.src = '/pcw/practica2/fotos/pubs/'+pub.imagen;

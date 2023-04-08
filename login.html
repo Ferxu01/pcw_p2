@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/index.css">
 
+    <script src="js/peticiones_HTTP.js"></script>
 </head>
 
 <body>
@@ -58,14 +59,14 @@
     <main>
         <section>
             <div class="login-div">
-                <form class="login-form" action="registro.html">
+                <form class="login-form" onsubmit="postLogin(event)">
                     <h2>Iniciar sesión</h2>
                     
                     <label for="login">Login<br></label>
                     <input type="text" id="login" name="login" autofocus required><br>
 
-                    <label for="password">Contraseña<br></label>
-                    <input type="password" id="password" name="password" required><br>
+                    <label for="pwd">Contraseña<br></label>
+                    <input type="password" id="password" name="pwd" required><br>
                     <input type="submit" value="Entrar">
                     <a class="btn-goto-registro" href="registro.html">Regístrate</a>
                 </form>
@@ -84,5 +85,6 @@
         </div>
     </footer>
 </body>
+
 
 </html>

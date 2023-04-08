@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/publicacion.css">
     <link rel="stylesheet" href="css/footer.css">
+
+    <script src="js/peticiones_HTTP.js"></script>
 </head>
 
 <body>
@@ -55,7 +57,7 @@
     </nav>
     
     <section>
-        <h2>Vecinos limpian parque central del barrio</h2>
+        <!-- <h2>Vecinos limpian parque central del barrio</h2>
         <hr>
         <article class="publish-container">
             <div class="publish-body">
@@ -84,9 +86,9 @@
                     <span class="numComments">7</span> <a href="#comentarios">comentarios</a>
                 </div>
             </div>
-            <hr>
+            <hr> -->
             
-            <h2>Fotos:</h2>
+            <!--<h2>Fotos:</h2>
 
             <hr>
             <div class="publish-imgs">
@@ -103,9 +105,9 @@
                     <p>La mayoría de vecinos del barrio están comprometidos para el buen mantenimiento de sus parques.</p>
                 </div>
             </div>            
-        </article>
+        </article>-->
 
-        <h2 id="comentarios">Comentarios:</h2>
+        <!--<h2 id="comentarios">Comentarios:</h2>
         <hr>
         <article class="comments">
             <h3>&nbsp;</h3>
@@ -140,7 +142,7 @@
             </div>
             <div class="form-area">
                 <p>Tienes que estar <a href="login.html">logueado</a> para poder dejar un comentario</p>
-                <form>
+                <form onsubmit="return postComentario(this);">
                     <label for="comentario">Deja tu comentario...</label>
                     <br>
                     <textarea name="comentario" id="comentario" maxlength="250"></textarea>
@@ -148,7 +150,7 @@
                     <input type="reset" value="Limpiar">
                 </form>
             </div>
-        </article>
+        </article>-->
     </section>
 
     <footer class="site-footer">
@@ -160,5 +162,6 @@
         </div>
   </footer>
 </body>
-
+<script src="js/helpers.js"></script>
+<script src="js/publicacion.js"></script>
 </html>

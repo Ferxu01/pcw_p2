@@ -1,5 +1,6 @@
+let usuarioLogueado = getUserData() || undefined;
+
 (function() {
-    sessionStorage.setItem('token', 'miToken');
     const logout = document.querySelector('span.logout');
 
     if (isLogged()) {
@@ -11,9 +12,8 @@
         const registro = document.querySelector('span.registro');
         login.parentElement.parentElement.remove();
         registro.parentElement.parentElement.remove();
-        const usuario = 'Fernando';
-        logout.textContent += ` (${usuario})`; //VER ATRIBUTO USUARIO Y EDITAR
-        //login.parentElement.parentElement.setAttribute('display', 'none');
+
+        logout.textContent += ` (${usuarioLogueado.LOGIN})`; //VER ATRIBUTO USUARIO Y EDITAR
     } else {
         console.log('not logged');
         //Ocultar LOGOUT y NUEVA
@@ -21,5 +21,11 @@
         const nueva = document.querySelector('span.nueva');
         logout.parentElement.parentElement.remove();
         nueva.parentElement.parentElement.remove();
+        console.warn('no logueado');
+        
+        const pagina = location.href.split('/').pop();
+        if (pagina !== 'index.html') {
+            location.href = 'index.html'; //Redirigir al index
+        }
     }
 })();
