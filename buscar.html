@@ -40,16 +40,16 @@
                 <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="search-icon"></a>
             </li>
             <li>
-                <a href="nueva.html"><span>Nueva</span><img src="images/icons/new-icon.png" alt="new-icon"></a>
+                <a href="nueva.html"><span class="nueva">Nueva</span><img src="images/icons/new-icon.png" alt="new-icon"></a>
             </li>
             <li>
-                <a href="index.html"><span>Logout</span><img src="images/icons/logout-icon.png" alt="logout-icon"></a>
+                <a onclick="postLogout()"><span class="logout">Logout</span><img src="images/icons/logout-icon.png" alt="logout-icon"></a>
             </li>
             <li>
-                <a href="login.html"><span>Login</span><img src="images/icons/login-icon.png" alt="login-icon"></a>
+                <a href="login.html"><span class="login">Login</span><img src="images/icons/login-icon.png" alt="login-icon"></a>
             </li>
             <li>
-                <a href="registro.html"><span>Registro</span><img src="images/icons/register-icon.png"
+                <a href="registro.html"><span class="registro">Registro</span><img src="images/icons/register-icon.png"
                         alt="register-icon"></a>
             </li>
         </ul>
@@ -192,6 +192,10 @@
             <div style="clear: both"></div>
         </div>
     </footer>
+
+    <script src="js/helpers.js"></script>
+    <script src="js/peticiones_HTTP.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 
 </html>

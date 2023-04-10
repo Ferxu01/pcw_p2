@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const valores = location.search;
     const urlParams = new URLSearchParams(valores);
     const idPub = urlParams.get('id');
+    console.log(idPub);
 
     if (!idPub) {
         location.href = 'index.html';
@@ -10,13 +11,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         //HACER PETICION AL SERVIDOR PARA OBTENER LOS DATOS
         const respData = await getPublicacion(idPub);
         const publicacion = respData.FILAS[0];
-        console.log(publicacion);
         const respComments = await getComentariosPublicacion(idPub);
         const comentarios = respComments.FILAS;
         //console.log(comentarios);
         const respImages = await getFotosPublicacion(idPub);
         const images = respImages.FILAS;
-        console.log(images);
         
         //CREAR EL APARTADO DE FOTOS DE LA PUBLICACION
         const divImg = document.createElement('div');
@@ -43,8 +42,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         divComments.classList.add('comments-container');
         
         comentarios.forEach(comentario => {
-            console.warn(comentario);
-
             const userComment = document.createElement('div');
             userComment.classList.add('user-comment');
 
@@ -83,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <h2>${publicacion.titulo}</h2>
             <hr>
             <article class="publish-container">
-                <div class="publish-body>
+                <div class="publish-body">
                     <p class="publish-descrip">${publicacion.texto}</p>
                     <p>Ubicación: <a href="">${publicacion.nombreZona}</a></p>
                 </div>
@@ -100,8 +97,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </div>
 
                     <div class="likes-info">
-                        <button class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/like-icon.svg" alt="icono like"> Me gusta (<span class="numLikes">${publicacion.nMeGusta}</span>)</button> <br>
-                        <button class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/dislike-icon.svg" alt="icono dislike"> No me gusta (<span class="numDislikes">${publicacion.nNoMeGusta}</span>)</button>
+                        <button onclick="postMeGusta(${idPub})" id="like" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/like-icon.svg" alt="icono like"> Me gusta (<span class="numLikes">${publicacion.nMeGusta}</span>)</button> <br>
+                        <button onclick="postNoMeGusta(${idPub})" id="dislike" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/dislike-icon.svg" alt="icono dislike"> No me gusta (<span class="numDislikes">${publicacion.nNoMeGusta}</span>)</button>
                     </div>
                     <div class="comments-info">
                         <img class="sm-icon-height" src="images/icons/svg/comment-icon.svg" alt="comment icon">
@@ -139,13 +136,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         formArea.innerHTML = `
             <p>Tienes que estar <a href="login.html">logueado</a> para poder dejar un comentario</p>
         `;
+
+        //DESHABIITAR BOTONES DE ME GUSTA Y NO ME GUSTA
+        const botones = document.querySelectorAll('button.btn-valoracion');
+        botones.forEach(btn => {
+            btn.setAttribute('disabled', true);
+        });
     } else {
         //MOSTRAR FORMULARIO
         formArea.innerHTML = `
-            <form onsubmit="return postComentario(this);">
-                <label for="comentario">Deja tu comentario...</label>
+            <form onsubmit="return postComentario(this,${idPub});">
+                <label for="texto">Deja tu comentario...</label>
                 <br>
-                <textarea name="comentario" id="comentario" maxlength="250"></textarea>
+                <textarea name="texto" id="texto" maxlength="250"></textarea>
                 <input type="submit" value="Enviar">
                 <input type="reset" value="Limpiar">
             </form>

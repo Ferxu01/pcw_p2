@@ -61,6 +61,10 @@ hr {
     cursor: pointer;
 }
 
+.disabled { /*Aplicado cuando se le da like o dislike a una publicacion*/
+    opacity: 50%;
+}
+
 .publish-descrip {
     margin-bottom: 15px;
     text-align: justify;

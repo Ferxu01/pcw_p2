@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    let zonas = await peticionFetchAPI_GET();
+    let zonas = await getZonas();
     console.log(zonas);
 
     let datalist = document.querySelector('datalist');

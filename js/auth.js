@@ -24,8 +24,8 @@ let usuarioLogueado = getUserData() || undefined;
         console.warn('no logueado');
         
         const pagina = location.href.split('/').pop();
-        if (pagina !== 'index.html') {
+        /*if (pagina !== 'index.html') { //REVISAR LAS PAGINAS A LAS QUE SE PUEDE ACCEDER
             location.href = 'index.html'; //Redirigir al index
-        }
+        }*/
     }
 })();

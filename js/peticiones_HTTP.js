@@ -140,12 +140,7 @@ function postLogin(evt) {
 }
 
 function postLogout() {
-    let url = 'api/usuarios/logout',
-        usu = getUserData(),
-        auth;
-    
-    auth = usu.LOGIN + ':' + usu.TOKEN;
-    fetch(url, {
+    /*fetch(url, {
         method: 'POST',
         headers: {
             'Authoritation': auth
@@ -158,7 +153,30 @@ function postLogout() {
         }
     }).catch(error => {
         console.error(error);
-    });
+    });*/
+
+    let xhr = new XMLHttpRequest(),
+        url = 'api/usuarios/logout',
+        usu = getUserData(),
+        auth;
+    
+    xhr.open('POST', url, true);
+    xhr.responseType = 'json';
+
+    xhr.onload = function(){
+        let r = xhr.response;
+
+        if (r.CODIGO === 200) {
+            //ELIMINAR EL TOKEN Y EL USUARIO DE SESSION STORAGE
+            clearSessionData();
+            location.href = 'index.html';
+        }
+
+        console.log(r);
+    };
+    auth = usu.LOGIN + ':' + usu.TOKEN;
+    xhr.setRequestHeader('Authorization', auth);
+    xhr.send();
 }
 
 function postRegistro(evt) {
@@ -169,32 +187,90 @@ function postPublicacion(evt) {
     
 }
 
-function postComentario(frm) {
-    const id = location.href.split('/');
+function postComentario(frm, id) {
+    //const id = location.href.split('/');
     console.log(id);
 
-    let url = `api/publicaciones/${id}/comentarios`,
+    let xhr = new XMLHttpRequest(),
+        url = `api/publicaciones/${id}/comentarios`,
         fd = new FormData(frm),
         usu = getUserData(),
         auth;
     
-    auth = usu.LOGIN + ':' + usu.TOKEN;
     xhr.open('POST', url, true);
     xhr.responseType = 'json';
 
     xhr.onload = function(){
         let r = xhr.response;
 
+        if (r.CODIGO === 201) {
+            //ANYADIR COMENTARIO POR HTML A LA LISTA
+            actualizaComentarios(id);
+            const form = document.querySelector('form');
+            form.reset();
+            //MOSTRAR MENSAJE MODAL
+            
+        }
+
         console.log(r);
     };
     auth = usu.LOGIN + ':' + usu.TOKEN;
-    xhr.setRequestHeader('Authoritation', auth);
+    xhr.setRequestHeader('Authorization', auth);
     xhr.send(fd);
 
     return false;
 }
 
-function getUsuario() {
+function postMeGusta(id) {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest(),
+            url = `api/publicaciones/${id}/megusta`,
+            usu = getUserData(),
+            auth;
+
+        xhr.open('POST', url, true);
+        xhr.responseType = 'json';
+
+        xhr.onload = () => {
+            let r = xhr.response;
+            const btnLike = document.querySelector('button#like');
+            btnLike.classList.toggle('disabled');
+
+            console.log(r);
+            resolve(r);
+        };
+        auth = usu.LOGIN + ':' + usu.TOKEN;
+        xhr.setRequestHeader('Authorization', auth);
+        xhr.send();
+    });
+}
+
+function postNoMeGusta(id) {
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest(),
+            url = `api/publicaciones/${id}/nomegusta`,
+            usu = getUserData(),
+            auth;
+
+        xhr.open('POST', url, true);
+        xhr.responseType = 'json';
+
+        xhr.onload = () => {
+            let r = xhr.response;
+
+            const btnDislike = document.querySelector('button#dislike');
+            btnDislike.classList.toggle('disabled');
+
+            console.log(r);
+            resolve(r);
+        };
+        auth = usu.LOGIN + ':' + usu.TOKEN;
+        xhr.setRequestHeader('Authorization', auth);
+        xhr.send();
+    });
+}
+
+/*function getUsuario() {
     console.log(usuario);
     return usuario;
-}
+}*/
