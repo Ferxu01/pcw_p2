@@ -75,6 +75,12 @@ function getPublicacion(id) {
             let publicaciones = xhr.response;
             resolve(publicaciones);
         };
+
+        if (isLogged()) {
+            const usu = getUserData();
+            const auth = usu.LOGIN + ':' + usu.TOKEN;
+            xhr.setRequestHeader('Authorization', auth);
+        }
         xhr.send();
     });
 }
@@ -140,21 +146,6 @@ function postLogin(evt) {
 }
 
 function postLogout() {
-    /*fetch(url, {
-        method: 'POST',
-        headers: {
-            'Authoritation': auth
-        }
-    }).then(response => {
-        if (response.ok) {
-            response.json().then(datos => {
-                console.log(datos);
-            });
-        }
-    }).catch(error => {
-        console.error(error);
-    });*/
-
     let xhr = new XMLHttpRequest(),
         url = 'api/usuarios/logout',
         usu = getUserData(),
@@ -233,8 +224,16 @@ function postMeGusta(id) {
 
         xhr.onload = () => {
             let r = xhr.response;
-            const btnLike = document.querySelector('button#like');
-            btnLike.classList.toggle('disabled');
+            const btnDislike = document.querySelector('button#dislike');
+            const spanLike = document.querySelector('span.numLikes');
+            spanLike.textContent = r.nMeGusta; //Actualizar numero de dislikes
+            
+            btnDislike.classList.toggle('disabled');
+            if (r.meGusta === -1) {
+                btnDislike.removeAttribute('disabled');
+            } else if (r.meGusta === 1) {
+                btnDislike.setAttribute('disabled', true);
+            }
 
             console.log(r);
             resolve(r);
@@ -258,8 +257,16 @@ function postNoMeGusta(id) {
         xhr.onload = () => {
             let r = xhr.response;
 
-            const btnDislike = document.querySelector('button#dislike');
-            btnDislike.classList.toggle('disabled');
+            const btnLike = document.querySelector('button#like');
+            const spanDislike = document.querySelector('span.numDislikes');
+            spanDislike.textContent = r.nNoMeGusta; //Actualizar numero de dislikes
+
+            btnLike.classList.toggle('disabled');
+            if (r.meGusta === -1) {
+                btnLike.removeAttribute('disabled');
+            } else if (r.meGusta === 0) {
+                btnLike.setAttribute('disabled', true);
+            }
 
             console.log(r);
             resolve(r);
@@ -269,8 +276,3 @@ function postNoMeGusta(id) {
         xhr.send();
     });
 }
-
-/*function getUsuario() {
-    console.log(usuario);
-    return usuario;
-}*/

@@ -137,10 +137,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             <p>Tienes que estar <a href="login.html">logueado</a> para poder dejar un comentario</p>
         `;
 
-        //DESHABIITAR BOTONES DE ME GUSTA Y NO ME GUSTA
+        //DESHABILITAR BOTONES DE ME GUSTA Y NO ME GUSTA
         const botones = document.querySelectorAll('button.btn-valoracion');
         botones.forEach(btn => {
             btn.setAttribute('disabled', true);
+            btn.classList.add('disabled'); //EFECTO VISUAL DE BOTON DESHABILITADO
         });
     } else {
         //MOSTRAR FORMULARIO
@@ -153,5 +154,25 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <input type="reset" value="Limpiar">
             </form>
         `;
+
+        //COMPROBAR LIKE O DISLIKE DEL USUARIO Y AGREGARLO AL BOTON CORRESPONDIENTE
+        const btnLike = document.querySelector('button#like');
+        const btnDislike = document.querySelector('button#dislike');
+        const respData = await getPublicacion(idPub);
+        const publicacion = respData.FILAS[0];
+        console.log(publicacion);
+
+        //REVISAR: publicacion.meGusta de valor 0 se refiere al usuario que da dislike?
+        //REVISAR: publicacion.meGusta de valor 1 se refiere al usuario que da like?
+
+        if (publicacion.meGusta === 1) { //USUARIO TIENE UN LIKE
+            btnDislike.classList.add('disabled');
+            btnDislike.setAttribute('disabled', true);
+
+        } else if (publicacion.meGusta === 0) { //USUARIO TIENE UN DISLIKE
+            btnLike.classList.add('disabled');
+            btnLike.setAttribute('disabled', true);
+
+        }
     }
 });
