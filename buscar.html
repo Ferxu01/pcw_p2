@@ -59,117 +59,29 @@
         <h2>Criterios de búsqueda</h2>
         <hr>
         <div class="filter-form">
-            <form>
+            <form onsubmit="realizaBusqueda(event)">
                 <div class="notice-search">
                     <label>Contiene:</label>
-                    <input class="resalte" type="text" name="textSearch" placeholder="Palabras separadas por comas">
+                    <input class="resalte" type="text" name="titulo" placeholder="Palabras separadas por comas">
 
                     <div class="date-search">
                         <label>Desde:</label>
-                        <input type="date" name="dateFrom">
+                        <input type="date" name="fechaDesde">
                         <br>
                         <label>Hasta:</label>
-                        <input type="date" name="dateFrom">
+                        <input type="date" name="fechaHasta">
+                    </div>
+                    <label>Ubicación:</label>
+                    <input type="text" class="resalte" name="zona" placeholder="Palabras separadas por comas">
                 </div>
-                <label>Ubicación:</label>
-                <input type="text" class="resalte" name="locationSearch" placeholder="Palabras separadas por comas">
-            </div>
-            <input type="submit" value="Buscar">
-            <input type="reset" value="Limpiar">
+                <input type="submit" value="Buscar">
+                <input type="reset" value="Limpiar">
             </form>
         </div>
         <h2>Resultado de la búsqueda</h2>
         <hr>
         <div id="notices">
-            <article class="notice-container">
-                <h3 class="notice-title" title="Vecinos limpian parque central"><a href="publicacion.html">Vecinos limpian parque central</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia1.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>10-marzo-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario1</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
-
-            <article class="notice-container">
-                <h3 class="notice-title" title="Nuevo centro comunitario en el barrio"><a href="publicacion.html">Nuevo centro comunitario en el barrio</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia2.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>20-febrero-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario4</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
-
-            <article class="notice-container">
-                <h3 class="notice-title" title="Aumenta la tasa de robos en el barrio"><a href="publicacion.html">Aumenta la tasa de robos en el barrio</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia3.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>10-febrero-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario3</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
-
-            <article class="notice-container">
-                <h3 class="notice-title" title="Comienzan obras de reparación en el barrio"><a href="publicacion.html">Comienzan obras de reparación en el barrio</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia4.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>28-enero-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario5</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
-
-            <article class="notice-container">
-                <h3 class="notice-title" title="Celebración del día del barrio con actividades culturales"><a href="publicacion.html">Celebración del día del barrio con actividades culturales</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia5.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>20-enero-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario2</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
-
-            <article class="notice-container">
-                <h3 class="notice-title" title="Rescatan a un perro abandonado en el barrio"><a href="publicacion.html">Rescatan a un perro abandonado en el barrio</a></h3>
-                <a href="publicacion.html"><img src="images/noticias/noticia6.png" alt="Foto noticia"></a>
-                <div class="info">
-                    <div class="notice-date">
-                        <p>18-enero-2023</p>
-                        <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
-                    </div>
-                    <div class="username">
-                        <p>usuario2</p>
-                        <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
-                    </div>
-                </div>
-            </article>
+            
         </div>
 
         <div id="pagination">
@@ -196,6 +108,7 @@
     <script src="js/helpers.js"></script>
     <script src="js/peticiones_HTTP.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/buscar.js"></script>
 </body>
 
 </html>

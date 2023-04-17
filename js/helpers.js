@@ -1,16 +1,59 @@
+function formateaFecha(fecha) {
+    const nuevaFecha = new Date(fecha);
+    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+
+    const diaSemana = diasSemana[nuevaFecha.getDay()];
+    const dia = nuevaFecha.getDate();
+    const mes = meses[nuevaFecha.getMonth()];
+    const anyo = nuevaFecha.getFullYear();
+    
+    const fechaFormateada = `${diaSemana}, ${dia} de ${mes} de ${anyo}`;
+    //Formato: lunes, 18 de febrero de 2023
+    return fechaFormateada;
+}
+
 function prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
     let urlPeticion = 'api/publicaciones';
-    if (titulo)
-        urlPeticion += `?t=${titulo}`;
-    if (zona)
-        urlPeticion += `?z=${zona}`;
-    if (fechaDesde)
-        urlPeticion += `?fd=${fechaDesde}`;
-    if (fechaHasta)
-        urlPeticion += `?fh=${fechaHasta}`;
-    if (pagina && registrosPorPagina)
+    let existeParametro = false;
+
+    if (titulo) {
+        if (!existeParametro) {
+            urlPeticion += `?t=${titulo}`;
+            existeParametro = true;
+        } else
+            urlPeticion += `&t=${titulo}`;
+    }
+    
+    if (zona) {
+        if (!existeParametro) {
+            urlPeticion += `?z=${zona}`;
+            existeParametro = true;
+        } else
+            urlPeticion += `&z=${zona}`;
+    }
+
+    if (fechaDesde) {
         //Helper para comprobar el formato de la fecha por parametro
+        if (!existeParametro) {
+            urlPeticion += `?fd=${fechaDesde}`;
+            existeParametro = true;
+        } else
+            urlPeticion += `&fd=${fechaDesde}`;
+    }
+
+    if (fechaHasta) {
+        //Helper para comprobar el formato de la fecha por parametro
+        if (!existeParametro) {
+            urlPeticion += `?fh=${fechaHasta}`;
+            existeParametro = true;
+        } else
+            urlPeticion += `&fh=${fechaHasta}`;
+    }
+
+    if (pagina && registrosPorPagina)
         urlPeticion += `?pag=${pagina}&lpag=${registrosPorPagina}`;
+
+    console.log(urlPeticion);
     
     return urlPeticion;
 }
@@ -90,4 +133,65 @@ async function actualizaComentarios(id) {
     `;
 
     numComentarios.textContent = comentarios.length;
+}
+
+function creaPublicaciones(publicaciones) {
+    const divPubs = document.getElementById('notices');
+
+    (publicaciones.FILAS).forEach(pub => {
+        const publicacion = document.createElement('article');
+        publicacion.classList.add('notice-container');
+        
+        const headerLink = document.createElement('a');
+        headerLink.href = `publicacion.html?id=${pub.id}`;
+        headerLink.text = pub.titulo;
+        const header = document.createElement('h3');
+        header.classList.add('notice-title');
+        header.title = pub.titulo;
+        header.appendChild(headerLink);
+
+        const imgLink = document.createElement('a');
+        imgLink.href = `publicacion.html?id=${pub.id}`;
+
+        const pubImg = document.createElement('img');
+        pubImg.src = '/pcw/practica2/fotos/pubs/'+pub.imagen;
+        pubImg.alt = 'Foto noticia';
+        imgLink.appendChild(pubImg);
+
+        publicacion.appendChild(header);
+        publicacion.appendChild(imgLink);
+
+        publicacion.innerHTML += `
+            <div class="info">
+                <div class="notice-date">
+                    <p>${pub.fechaCreacion}</p>
+                    <img class="small-icon-2" src="images/icons/svg/calendar-icon.svg" alt="calendar icon">
+                </div>
+                <div class="username">
+                    <p>${pub.autor}</p>
+                    <img class="small-icon-1" src="images/icons/svg/user-icon.svg" alt="user icon">
+                </div>
+            </div>
+        `;
+
+        divPubs.appendChild(publicacion);
+    });
+}
+
+async function realizaBusqueda(evt) {
+    evt.preventDefault();
+
+    const titulo = document.querySelector('input[name=titulo]').value || undefined;
+    const fechaDesde = document.querySelector('input[name=fechaDesde]').value || undefined;
+    const fechaHasta = document.querySelector('input[name=fechaHasta]').value || undefined;
+    const zona = document.querySelector('input[name=zona]').value || undefined;
+    console.log(titulo);
+    console.log(fechaDesde);
+    console.log(fechaHasta);
+    console.log(zona);
+
+    //LLAMAR AL SERVICIO DE BUSQUEDA DE PUBLICACIONES FILTRADAS
+    const publicaciones = await getPublicacionesFiltro({ titulo, fechaDesde, fechaHasta, zona });
+    console.warn(publicaciones);
+    return publicaciones;
 }

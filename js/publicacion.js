@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const valores = location.search;
     const urlParams = new URLSearchParams(valores);
     const idPub = urlParams.get('id');
-    console.log(idPub);
 
     if (!idPub) {
         location.href = 'index.html';
@@ -11,9 +10,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         //HACER PETICION AL SERVIDOR PARA OBTENER LOS DATOS
         const respData = await getPublicacion(idPub);
         const publicacion = respData.FILAS[0];
+        //DEJAR LA FECHA EN EL FORMATO CORRESPONDIENTE
+        //const fechaFormateada = formateaFecha(publicacion.fechaCreacion);
+
         const respComments = await getComentariosPublicacion(idPub);
         const comentarios = respComments.FILAS;
-        //console.log(comentarios);
         const respImages = await getFotosPublicacion(idPub);
         const images = respImages.FILAS;
         
@@ -42,6 +43,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         divComments.classList.add('comments-container');
         
         comentarios.forEach(comentario => {
+            const fechaFormateada = formateaFecha(comentario.fechaHora);
+
             const userComment = document.createElement('div');
             userComment.classList.add('user-comment');
 
@@ -59,7 +62,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const htmlFecha = `
                 <div class="comment-date">
                     <img class="md-icon-height" src="images/icons/svg/calendar-icon.svg" alt="icono calendario">
-                    <span>${comentario.fechaHora}</span>
+                    <span>${fechaFormateada}</span>
                 </div>
             `;
             divUserAvatar.appendChild(imgAvatar);
@@ -82,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <article class="publish-container">
                 <div class="publish-body">
                     <p class="publish-descrip">${publicacion.texto}</p>
-                    <p>Ubicación: <a href="">${publicacion.nombreZona}</a></p>
+                    <p>Ubicación: <a href="buscar.html?zona=${publicacion.nombreZona}">${publicacion.nombreZona}</a></p>
                 </div>
                 <hr>
 
@@ -161,9 +164,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const respData = await getPublicacion(idPub);
         const publicacion = respData.FILAS[0];
         console.log(publicacion);
-
-        //REVISAR: publicacion.meGusta de valor 0 se refiere al usuario que da dislike?
-        //REVISAR: publicacion.meGusta de valor 1 se refiere al usuario que da like?
 
         if (publicacion.meGusta === 1) { //USUARIO TIENE UN LIKE
             btnDislike.classList.add('disabled');

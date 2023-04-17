@@ -164,13 +164,13 @@ else
         $texto         = nl2br($PARAMS['texto'],false);
         $zona          = $PARAMS['zona'];
         $descripciones = $PARAMS['descripciones'];
-
         // ==================================================
         // Hay que buscar la zona en la BD. Si existe se utiliza su id.
         // Si no existe, se crea.
         // ==================================================
         $mysql = 'select * from zona where nombre=:ZONA';
         $RESPUESTA = $db->select($mysql, [':ZONA'=>$zona]);
+
         if( $RESPUESTA['CORRECTO'] ) // execute query OK
         {
           if(count($RESPUESTA['RESULT']) > 0)
@@ -183,7 +183,7 @@ else
             if( $db->executeStatement($mysql, [':NOMBRE'=>$zona]) )
             {
               $mysql = 'select max(id) as idZona from zona';
-              $RESPUESTA = $db->select($mysql, $VALORES);
+              $RESPUESTA = $db->select($mysql);
               if( $RESPUESTA['CORRECTO'] ) // execute query OK
               {
                 if(count($RESPUESTA['RESULT']) > 0)

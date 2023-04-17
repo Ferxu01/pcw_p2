@@ -17,51 +17,52 @@ function getDisponibilidadLogin(login) {
 
 async function getZonas() {
     let url = 'api/zonas';
-    //let response;
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
 
-    const res = await fetch(url);
-    let zonas = await res.json();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = () => {
+            let zonas = xhr.response;
+            resolve(zonas);
+        };
 
-    console.log(zonas);
-    /*fetch(url).then(res => {
-        if (res.ok) {
-            console.log(res);
-            return res.json();
-        } else {
-            console.log('Error(' + res.status + '): ' + res.statusText);
-            return;
-        }
-    })
-    .then(data => {
-        console.log(data);
-        response = data;
-        return data;
-    })
-    .catch(err => {
-        console.error(err);
-    });*/
-
-    return zonas;
+        xhr.send();
+    });
 }
 
-async function getPublicaciones() {
+function getPublicaciones() {
     const url = 'api/publicaciones';
-    const res = await fetch(url);
-    const publicaciones = await res.json();
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
 
-    console.log(publicaciones);
-    return publicaciones;
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = () => {
+            let publicaciones = xhr.response;
+            resolve(publicaciones);
+        };
+
+        xhr.send();
+    });
 }
 
-async function getPublicacionesFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
+function getPublicacionesFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
     //Obtener la url a partir de los datos del filtrado
     const url = prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina });
-    
-    const res = await fetch(url);
-    const publicaciones = await res.json();
 
-    console.log(publicaciones);
-    return publicaciones;
+    return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = () => {
+            let publicaciones = xhr.response;
+            resolve(publicaciones);
+        };
+
+        xhr.send();
+    });
 }
 
 function getPublicacion(id) {

@@ -7,7 +7,7 @@
 class Database{
     // Configuración del servidor de base de datos
     // private $HOST     = "localhost"; // si no funciona con $HOST="127.0.0.1", probar con éste.
-    private $HOST              = "localhost";
+    private $HOST              = "127.0.0.1";
     private $DB_DATABASE_NAME  = "websocial";
     private $DB_USERNAME       = "pcw";
     private $DB_PASSWORD       = "pcw";
