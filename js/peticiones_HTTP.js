@@ -50,7 +50,7 @@ function getPublicaciones() {
 function getPublicacionesFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
     //Obtener la url a partir de los datos del filtrado
     const url = prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina });
-
+    
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
 
