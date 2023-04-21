@@ -13,15 +13,23 @@ document.addEventListener('DOMContentLoaded', async () => {
     totalPags.textContent = Math.ceil(publicaciones.TOTAL_COINCIDENCIAS/publicaciones.LPAG); //REDONDEA HACIA ARRIBA PARA OBTENER LAS PAGINAS TOTALES
 
     if (parseInt(pagActual.textContent) === 1 && parseInt(totalPags.textContent) === 1) {
-        botonesPaginacion[0].setAttribute('disabled', true);
+        /*botonesPaginacion[0].setAttribute('disabled', true);
         botonesPaginacion[1].setAttribute('disabled', true);
         botonesPaginacion[2].setAttribute('disabled', true);
-        botonesPaginacion[3].setAttribute('disabled', true);
+        botonesPaginacion[3].setAttribute('disabled', true);*/
+
+        botonesPaginacion.forEach(boton => {
+            boton.removeAttribute('onclick');
+        });
     } else {
         //DESHABILITAR BOTONES DE PAGINA ANTERIOR AL SER LA PRIMERA PAGINA MOSTRADA
         const btnPrimeraPag = botonesPaginacion[0];
         const btnPagAnterior = botonesPaginacion[1];
-        btnPrimeraPag.setAttribute('disabled', true);
-        btnPagAnterior.setAttribute('disabled', true);
+        /*btnPrimeraPag.setAttribute('disabled', true);
+        btnPagAnterior.setAttribute('disabled', true);*/
+
+        //SE EVITA QUE SE EJECUTE LA FUNCION PARA EVITAR TRAFICO
+        btnPrimeraPag.removeAttribute('onclick');
+        btnPagAnterior.removeAttribute('onclick');
     }
 });

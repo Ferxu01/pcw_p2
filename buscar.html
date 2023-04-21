@@ -86,11 +86,11 @@
 
         <div id="pagination">
             <div class="center-pagination">
-                <button class="btn-pagination"> &lt;&lt; </button>
-                <button class="btn-pagination">&lt;</button>
-                <p>&nbsp;&nbsp;&nbsp;Página 1 de 5&nbsp;&nbsp;&nbsp;</p>
-                <button class="btn-pagination">&gt;</button>
-                <button class="btn-pagination"> &gt;&gt; </button>
+                <button id="btnPrimeraPag" onclick="actualizaPaginacion(event)" class="btn-pagination"> &lt;&lt; </button>
+                <button id="btnAnteriorPag" onclick="actualizaPaginacion(event)" class="btn-pagination">&lt;</button>
+                <p>&nbsp;&nbsp;&nbsp;Página <span class="pagActual">1</span> de <span class="totalPags">1</span>&nbsp;&nbsp;&nbsp;</p>
+                <button id="btnSiguientePag" onclick="actualizaPaginacion(event)" class="btn-pagination">&gt;</button>
+                <button id="btnUltimaPag" onclick="actualizaPaginacion(event)" class="btn-pagination"> &gt;&gt; </button>
             </div>
         </div>
     </section>

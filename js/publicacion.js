@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             <article class="publish-container">
                 <div class="publish-body">
                     <p class="publish-descrip">${publicacion.texto}</p>
-                    <p>Ubicación: <a href="buscar.html?zona=${publicacion.nombreZona}">${publicacion.nombreZona}</a></p>
+                    <p>Ubicación: <a href="buscar.html?z=${publicacion.nombreZona}">${publicacion.nombreZona}</a></p>
                 </div>
                 <hr>
 

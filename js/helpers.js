@@ -13,8 +13,10 @@ function formateaFecha(fecha) {
 }
 
 function prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
-    pagina = Number(pagina);
-    registrosPorPagina = Number(registrosPorPagina);
+    if (pagina !== undefined && registrosPorPagina !== undefined) {
+        pagina = Number(pagina);
+        registrosPorPagina = Number(registrosPorPagina);
+    }
 
     let urlPeticion = 'api/publicaciones';
     let existeParametro = false;
@@ -53,8 +55,13 @@ function prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, regist
             urlPeticion += `&fh=${fechaHasta}`;
     }
 
-    if (pagina !== undefined && registrosPorPagina !== undefined)
-        urlPeticion += `?pag=${pagina}&lpag=${registrosPorPagina}`;
+    if (pagina !== undefined && registrosPorPagina !== undefined) {
+        if (!existeParametro) {
+            urlPeticion += `?pag=${pagina}&lpag=${registrosPorPagina}`;
+            existeParametro = true; //Aqui ya no es necesario ponerlo al ser el final
+        } else
+            urlPeticion += `&pag=${pagina}&lpag=${registrosPorPagina}`;
+    }
     
     return urlPeticion;
 }
@@ -75,6 +82,10 @@ function clearSessionData() {
 }
 
 async function actualizaPaginacion(evt) {
+    //COMPROBAR SI EXISTE PARAMETRO EN LA URL DE PAGINACION
+    const valores = location.search;
+    const urlParams = new URLSearchParams(valores);
+
     let pagActual = document.getElementsByClassName('pagActual')[0];
     let totalPags = document.getElementsByClassName('totalPags')[0];
 
@@ -95,34 +106,34 @@ async function actualizaPaginacion(evt) {
             paginaPeticion = 0;
 
             //DESHABILITAR BOTONES ANTERIOR Y PRIMERA PAGINA
-            botonesPaginacion[0].setAttribute('disabled', true);
-            botonesPaginacion[1].setAttribute('disabled', true);
+            botonesPaginacion[0].removeAttribute('onclick');
+            botonesPaginacion[1].removeAttribute('onclick');
             
-            botonesPaginacion[2].removeAttribute('disabled');
-            botonesPaginacion[3].removeAttribute('disabled');
+            botonesPaginacion[2].setAttribute('onclick', 'actualizaPaginacion(event)');
+            botonesPaginacion[3].setAttribute('onclick', 'actualizaPaginacion(event)');
 
             
         } else if (evt.target.id === 'btnAnteriorPag') {
             pagActual.textContent--;
             paginaPeticion = parseInt(pagActual.textContent)-1; //CALCULAR NUM PAGINA PARA LA PETICION
 
-            botonesPaginacion[2].removeAttribute('disabled');
-            botonesPaginacion[3].removeAttribute('disabled');
+            botonesPaginacion[2].setAttribute('onclick', 'actualizaPaginacion(event)');
+            botonesPaginacion[3].setAttribute('onclick', 'actualizaPaginacion(event)');
 
             if (parseInt(pagActual.textContent) === 1) {
-                botonesPaginacion[0].setAttribute('disabled', true);
-                botonesPaginacion[1].setAttribute('disabled', true);
+                botonesPaginacion[0].removeAttribute('onclick');
+                botonesPaginacion[1].removeAttribute('onclick');
             }
 
         } else if (evt.target.id === 'btnSiguientePag') {
             pagActual.textContent++;
 
-            botonesPaginacion[0].removeAttribute('disabled');
-            botonesPaginacion[1].removeAttribute('disabled');
+            botonesPaginacion[0].setAttribute('onclick', 'actualizaPaginacion(event)');
+            botonesPaginacion[1].setAttribute('onclick', 'actualizaPaginacion(event)');
 
             if (parseInt(pagActual.textContent) === parseInt(totalPags.textContent)) {
-                botonesPaginacion[2].setAttribute('disabled', true);
-                botonesPaginacion[3].setAttribute('disabled', true);
+                botonesPaginacion[2].removeAttribute('onclick');
+                botonesPaginacion[3].removeAttribute('onclick');
             }
             
 
@@ -130,19 +141,32 @@ async function actualizaPaginacion(evt) {
             pagActual.textContent = parseInt(totalPags.textContent);
             paginaPeticion = parseInt(totalPags.textContent)-1;
 
-            botonesPaginacion[0].removeAttribute('disabled');
-            botonesPaginacion[1].removeAttribute('disabled');
+            botonesPaginacion[0].setAttribute('onclick', 'actualizaPaginacion(event)');
+            botonesPaginacion[1].setAttribute('onclick', 'actualizaPaginacion(event)');
+
             //DESHABILITAR BOTONES SIGUIENTE Y ULTIMA PAGINA
-            botonesPaginacion[2].setAttribute('disabled', true);
-            botonesPaginacion[3].setAttribute('disabled', true);
+            botonesPaginacion[2].removeAttribute('onclick');
+            botonesPaginacion[3].removeAttribute('onclick');
 
         }
 
-        const publicaciones = await getPublicacionesFiltro({ registrosPorPagina: 6, pagina: paginaPeticion }); //LA PAGINA 0 ES LA PRIMERA PAGINA
+        const urlParams = new URLSearchParams(valores);
+        const parametrosPeticion = {
+            titulo: urlParams.get('t') || undefined,
+            zona: urlParams.get('z') || undefined,
+            fechaDesde: urlParams.get('fd') || undefined,
+            fechaHasta: urlParams.get('fh') || undefined,
+            pagina: paginaPeticion,
+            registrosPorPagina: parseInt(urlParams.get('lpag')) || 6
+        };
+
+        console.log(parametrosPeticion);
+
+        const publicaciones = await getPublicacionesFiltro(parametrosPeticion);//LA PAGINA 0 ES LA PRIMERA PAGINA
 
         //LIMPIAR LAS PUBLICACIONES ANTERIORES
         document.querySelector('div#notices').innerHTML = '';
-        //CREAR LAS NUEVAS PUBLICACIONES
+
         creaPublicaciones(publicaciones);
     }
 
@@ -213,16 +237,6 @@ async function actualizaComentarios(id) {
 function creaPublicaciones(publicaciones) {
     let divPubs = document.getElementById('notices');
 
-    /*if (!divPubs) {
-        divPubs = document.createElement('div');
-        divPubs.id = 'notices';
-        document.getElementsByTagName();
-
-        divPubs = document.getElementById('notices');
-
-        //console.warn(divPubs);
-    }*/
-
     (publicaciones.FILAS).forEach(pub => {
         const publicacion = document.createElement('article');
         publicacion.classList.add('notice-container');
@@ -270,13 +284,35 @@ async function realizaBusqueda(evt) {
     const fechaDesde = document.querySelector('input[name=fechaDesde]').value || undefined;
     const fechaHasta = document.querySelector('input[name=fechaHasta]').value || undefined;
     const zona = document.querySelector('input[name=zona]').value || undefined;
-    console.log(titulo);
-    console.log(fechaDesde);
-    console.log(fechaHasta);
-    console.log(zona);
 
     //LLAMAR AL SERVICIO DE BUSQUEDA DE PUBLICACIONES FILTRADAS
-    const publicaciones = await getPublicacionesFiltro({ titulo, fechaDesde, fechaHasta, zona });
-    console.warn(publicaciones);
-    return publicaciones;
+    const publicaciones = await getPublicacionesFiltro({ titulo, fechaDesde, fechaHasta, zona, registrosPorPagina: 6, pagina: 0 });
+    console.log(publicaciones);
+
+    //LIMPIAR LAS PUBLICACIONES ANTERIORES
+    document.querySelector('div#notices').innerHTML = '';
+
+    creaPublicaciones(publicaciones);
+    
+    const botonesPaginacion = document.getElementsByTagName('button');
+    let pagActual = document.getElementsByClassName('pagActual')[0];
+    let totalPags = document.getElementsByClassName('totalPags')[0];
+    pagActual.textContent = 1; //AL INICIAR LA PAGINA SIEMPRE EMPIEZA POR LA PRIMERA PAGINA
+    totalPags.textContent = Math.ceil(publicaciones.TOTAL_COINCIDENCIAS/publicaciones.LPAG); //REDONDEA HACIA ARRIBA PARA OBTENER LAS PAGINAS TOTALES
+
+    if (parseInt(pagActual.textContent) === 1 && parseInt(totalPags.textContent) === 1) {
+        botonesPaginacion[0].setAttribute('disabled', true);
+        botonesPaginacion[1].setAttribute('disabled', true);
+        botonesPaginacion[2].setAttribute('disabled', true);
+        botonesPaginacion[3].setAttribute('disabled', true);
+    } else {
+        //DESHABILITAR BOTONES DE PAGINA ANTERIOR AL SER LA PRIMERA PAGINA MOSTRADA
+        const btnPrimeraPag = botonesPaginacion[0];
+        const btnPagAnterior = botonesPaginacion[1];
+        btnPrimeraPag.setAttribute('disabled', true);
+        btnPagAnterior.setAttribute('disabled', true);
+    }
+
+
+    //return publicaciones;
 }
