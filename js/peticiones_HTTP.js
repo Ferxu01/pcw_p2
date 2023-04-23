@@ -157,7 +157,7 @@ function postLogout() {
     xhr.open('POST', url, true);
     xhr.responseType = 'json';
 
-    xhr.onload = function(){
+    xhr.onload = () => {
         let r = xhr.response;
 
         if (r.CODIGO === 200) {
@@ -174,7 +174,23 @@ function postLogout() {
 }
 
 function postRegistro(evt) {
+    evt.preventDefault();
     
+    const frm = evt.currentTarget,
+        xhr = new XMLHttpRequest(),
+        url = 'api/usuarios/registro',
+        fd = new FormData(frm);
+    
+    xhr.open('POST', url, true);
+    xhr.responseType = 'json';
+
+    xhr.onload = () => {
+        let r = xhr.response;
+
+        console.log(r);
+    };
+
+    xhr.send(fd);
 }
 
 function postPublicacion(evt) {

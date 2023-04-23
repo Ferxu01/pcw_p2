@@ -60,9 +60,9 @@
         <hr>
         <div class="register-div">
             <div class="form-div">
-                <form>
-                    <label for="name">Nombre</label><br>
-                    <input type="text" id="name" name="name" required><br>
+                <form onsubmit="postRegistro(event)">
+                    <label for="nombre">Nombre</label><br>
+                    <input type="text" id="nombre" name="nombre" required><br>
 
                     <label for="login">Login</label><br>
                     <input type="text" id="login" name="login" minlength="4" maxlength="20" pattern="[a-zA-Z][a-zA-Z0-9]{3,19}" autofocus required><br>
@@ -70,27 +70,43 @@
                     <label for="email">Email</label><br>
                     <input type="email" id="email" name="email" required><br>
 
-                    <label for="password">Contraseña</label><br>
-                    <input type="password" id="password" name="password" minlength="4" maxlength="20" pattern="[a-zA-Z0-9._-]{4,20}" required><br>
+                    <label for="pwd">Contraseña</label><br>
+                    <input type="password" id="pwd" name="pwd" minlength="4" maxlength="20" pattern="[a-zA-Z0-9._-]{4,20}" required><br>
 
-                    <label for="password2">Confirmar contraseña</label><br>
-                    <input type="password" id="password2" name="password2"><br>
+                    <label for="pwd2">Confirmar contraseña</label><br>
+                    <input type="password" id="pwd2" name="pwd2"><br>
+
+                    <div class="image-div">
+                        <label for="file-upload">
+                            <img src="images/empty_picture.png" alt="Upload Image">
+                        </label>
+                        <input id="file-upload" type="file" accept="image/*" name="foto">
+    
+                        <input class="examinar" type="file" accept="image/*" name="foto" id="foto">
+
+                        <div class="buttons">
+                            <button type="button">Eliminar</button>
+                        </div>
+                    </div>
+
 
                     <input type="submit" value="Enviar">
                 </form>
             </div>
-            <div class="image-div">
+            <!--<div class="image-div">
                 <form>
                     <label for="file-upload">
                         <img src="images/empty_picture.png" alt="Upload Image">
                     </label>
-                    <input id="file-upload" type="file" accept="image/*">
+                    <input id="file-upload" type="file" accept="image/*" name="foto">
+
+                    <input class="examinar" type="file" accept="image/*" name="foto" id="foto">
                 </form>
                 <div class="buttons">
                     <input class="examinar" type="file" accept="image/*" name="foto" id="foto">
                     <button type="button">Eliminar</button>
                 </div>
-            </div>
+            </div>-->
         </div>
     </section>
 
