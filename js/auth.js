@@ -3,15 +3,6 @@ let usuarioLogueado = getUserData() || undefined;
 (function() {
     const logout = document.querySelector('span.logout');
 
-    
-
-    if (location.href !== 'index.html') {
-        const pagina = location.href.split('/').pop();
-        console.log(pagina);
-        checkAccesoPagina(pagina);
-    }
-
-
     if (isLogged()) {
         console.log('logged');
         
@@ -22,7 +13,13 @@ let usuarioLogueado = getUserData() || undefined;
         login.parentElement.parentElement.remove();
         registro.parentElement.parentElement.remove();
 
+
         logout.textContent += ` (${usuarioLogueado.LOGIN})`; //VER ATRIBUTO USUARIO Y EDITAR
+
+        const pagina = location.href.split('/').pop();
+        if (pagina == ('login.html' || 'registro.html')) { //REVISAR LAS PAGINAS A LAS QUE SE PUEDE ACCEDER
+            location.href = 'index.html'; //Redirigir al index
+        }
     } else {
         console.log('not logged');
         //Ocultar LOGOUT y NUEVA
@@ -30,10 +27,11 @@ let usuarioLogueado = getUserData() || undefined;
         const nueva = document.querySelector('span.nueva');
         logout.parentElement.parentElement.remove();
         nueva.parentElement.parentElement.remove();
+        console.warn('no logueado');
         
-        //const pagina = location.href.split('/').pop();
-        /*if (pagina !== 'index.html') { //REVISAR LAS PAGINAS A LAS QUE SE PUEDE ACCEDER
+        const pagina = location.href.split('/').pop();
+        if (pagina == ('nueva.html')) { //REVISAR LAS PAGINAS A LAS QUE SE PUEDE ACCEDER
             location.href = 'index.html'; //Redirigir al index
-        }*/
+        }
     }
 })();

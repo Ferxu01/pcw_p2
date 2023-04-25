@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/index.css">
 </head>
 
+
 <body>
     <header>
         <div class="header">
@@ -64,35 +65,32 @@
                     <label for="nombre">Nombre</label><br>
                     <input type="text" id="nombre" name="nombre" required><br>
 
-                    <label for="login">Login</label><br>
-                    <input type="text" id="login" name="login" minlength="4" maxlength="20" pattern="[a-zA-Z][a-zA-Z0-9]{3,19}" autofocus required><br>
+                    <label for="login">Login</label><label for="login" id="msgLogin"></label><br>
+                    <input type="text" id="login" name="login" minlength="4" maxlength="20" pattern="^(?![0-9])[a-zA-Z0-9]{3,19}$" autofocus required onblur="checkLogin()"><br>
                     
                     <label for="email">Email</label><br>
                     <input type="email" id="email" name="email" required><br>
 
                     <label for="pwd">Contraseña</label><br>
-                    <input type="password" id="pwd" name="pwd" minlength="4" maxlength="20" pattern="[a-zA-Z0-9._-]{4,20}" required><br>
+                    <input type="password" id="pwd" name="pwd" minlength="4" maxlength="20" pattern="^(?!.*\s)[a-zA-Z0-9_.-]{4,20}$" required><br>
 
-                    <label for="pwd2">Confirmar contraseña</label><br>
-                    <input type="password" id="pwd2" name="pwd2"><br>
+                    <label for="pwd2">Confirmar contraseña</label><label for="pwd2" id="msgPwd"></label><br>
+                    <input type="password" id="pwd2" name="pwd2"  oninput="compararPassword()"><br>
 
                     <div class="image-div">
-                        <label for="file-upload">
-                            <img src="images/empty_picture.png" alt="Upload Image">
-                        </label>
-                        <input id="file-upload" type="file" accept="image/*" name="foto">
-    
-                        <input class="examinar" type="file" accept="image/*" name="foto" id="foto">
+                        <label for="examinar">Foto de perfil</label><label for="examinar" id="msgImgSize"></label>
+                        <img src="" alt="Upload Image" id="img" onError="this.src ='images/empty_picture.png'" onclick="this.parentElement.querySelector('input[type=file]').click();">
+                        <input class="examinar" id="examinar" type="file" accept="image/*" onchange="mostrarFoto(this);">
 
                         <div class="buttons">
-                            <button type="button">Eliminar</button>
+                            <button type="button" onclick="this.parentElement.parentElement.querySelector('input[type=file]').click();">Cargar</button>
+                            <button type="button" onclick="eliminarFoto()">Eliminar</button>
                         </div>
                     </div>
-
-
                     <input type="submit" value="Enviar">
                 </form>
             </div>
+            
             <!--<div class="image-div">
                 <form>
                     <label for="file-upload">
@@ -123,6 +121,8 @@
     <script src="js/helpers.js"></script>
     <script src="js/peticiones_HTTP.js"></script>
     <script src="js/auth.js"></script>
+    <script src="js/registro.js"></script>
+    <script src="js/peticiones_HTTP.js"></script>
 </body>
 
 </html>

@@ -19,7 +19,7 @@ input[type="text"], input[type="password"], input[type="email"] {
     color: #000;
 }
 
-input[type="file"]:not(.examinar){
+input[type="file"].examinar{
     display: none;
 }
 
