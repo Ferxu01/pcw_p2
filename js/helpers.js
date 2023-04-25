@@ -70,6 +70,37 @@ function isLogged() {
     return sessionStorage.getItem('token') && sessionStorage.getItem('usuario');
 }
 
+function checkAccesoPagina(pagina) {
+    const paginasPermitidas = {
+        logged: ['index', 'buscar', 'nueva'], //PAGINAS ACCESIBLES SI LOGUEADO
+        noLogged: ['index', 'buscar', 'login', 'registro'] //PAGINAS ACCESIBLES SI NO LOGUEADO
+    };
+    let accesible = false;
+    let arrPaginas = null;
+
+    //COMPROBAR SI ES LA PAGINA PUBLICACION, QUE PUEDEN ACCEDER LOGUEADOS Y NO LOGUEADOS
+    //ES UNA SITUACION ESPECIAL EN LA PAGINA WEB
+    if (location.href.split('/').pop().includes('publicacion') 
+        || location.href.split('/').pop().includes('buscar')) {
+        accesible = true;
+    } else {
+        //SELECCIONAR EL ARRAY POR EL QUE SE VA A BUSCAR PARA LA COMPROBACION
+        if (isLogged())
+            arrPaginas = paginasPermitidas.logged;
+        else
+            arrPaginas = paginasPermitidas.noLogged;
+
+        arrPaginas.forEach(pag => {
+            pag += '.html';
+            if (pag === pagina)
+                accesible = true;
+        });
+    }
+
+    if (!accesible)
+        location.href = 'index.html';
+}
+
 function getUserData() {
     const session = sessionStorage.getItem('usuario');
     const obj = JSON.parse(session);
@@ -79,6 +110,20 @@ function getUserData() {
 function clearSessionData() {
     if (sessionStorage.getItem('token') && sessionStorage.getItem('usuario'))
         sessionStorage.clear();
+}
+
+function toggleFotos() {
+    const divFotos = document.querySelector('div.publish-imgs');
+    const btnToggle = document.querySelector('button.toggle');
+
+    //OCULTAR O HACER VISIBLE SEGUN TENGA O NO EL ID DE OCULTAR
+    if (btnToggle.hasAttribute('id')) {
+        btnToggle.removeAttribute('id');
+        divFotos.setAttribute('style', 'display: flex');
+    } else {
+        btnToggle.setAttribute('id', 'ocultar');
+        divFotos.setAttribute('style', 'display: none');
+    }
 }
 
 async function actualizaPaginacion(evt) {
@@ -315,4 +360,63 @@ async function realizaBusqueda(evt) {
 
 
     //return publicaciones;
+}
+
+function crearModalLogin(r) {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>Usuario ${r.LOGIN} logueado correctamente</h3>
+        <p>Última vez conectado: ${r.ULTIMO_ACCESO}</p>
+        <button class="modal" onclick="cerrarModal({ redireccion: 'index' })">Cerrar</button>
+    `;
+
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+function crearModalComentario(r) {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>${r.DESCRIPCION}</h3>
+        <button class="modal" onclick="cerrarModal({})">Cerrar</button>
+    `;
+
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+function crearModalError(r) {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>${r.DESCRIPCION}</h3>
+        <button onclick="cerrarModal({ focus: 'login' })">Cerrar</button>
+    `;
+
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+//FUNCION PARA PREPARAR CUALQUIER MODAL, ESTABLECE SUS ESTILOS PRINCIPALES
+function creaPropiedadesModal() {
+    let dialogo = document.createElement('dialog');
+    dialogo.style.padding = '25px';
+    dialogo.style.fontFamily = 'Arial';
+    dialogo.style.position = 'fixed';
+    dialogo.style.top = '50%';
+    dialogo.style.left = '50%';
+    dialogo.style.transform = 'translate(-50%, -50%)';
+    return dialogo;
+  }
+
+function cerrarModal({ redireccion, focus }) {
+    document.querySelector('dialog').close();
+    document.querySelector('dialog').remove();
+    
+    if (redireccion) { //REDIRECCIONAR A LA PAGINA, SI SE QUIERE
+        location.href = `${redireccion}.html`;
+    }
+
+    if (focus) { //COLOCAR FOCO DE NUEVO, SI SE QUIERE
+        document.getElementById(focus).focus();
+    }
 }

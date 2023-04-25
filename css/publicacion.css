@@ -176,6 +176,10 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     height: 20px;
 }
 
+.ocultar {
+    content: '';
+}
+
 @media (min-width: 480px) {
     .likes-info {
         justify-content: center;

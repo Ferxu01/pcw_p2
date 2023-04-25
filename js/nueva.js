@@ -1,3 +1,5 @@
+'use strict';
+
 document.addEventListener('DOMContentLoaded', async () => {
     let zonas = await getZonas();
     console.log(zonas);

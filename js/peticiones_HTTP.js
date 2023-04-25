@@ -1,5 +1,14 @@
 'use strict';
 
+function getFormComentario() {
+    const url = 'formulario.html';
+    fetch(url)
+        .then(res => res.text())
+        .then(data => {
+            document.querySelector('div.form-area').innerHTML = data;
+        });
+}
+
 function getDisponibilidadLogin(login) {
     const url = `api/usuarios/${login}`;
     return new Promise((resolve, reject) => {
@@ -15,7 +24,7 @@ function getDisponibilidadLogin(login) {
     });
 }
 
-async function getZonas() {
+function getZonas() {
     let url = 'api/zonas';
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
@@ -131,18 +140,23 @@ function postLogin(evt) {
 
     xhr.onload = () => {
         let r = xhr.response;
-        const { TOKEN, LOGIN, NOMBRE, FOTO, ULTIMO_ACCESO} = r;
-        const obj = {
-            NOMBRE,
-            LOGIN,
-            FOTO,
-            TOKEN,
-            ULTIMO_ACCESO
-        };
 
-        sessionStorage.setItem('usuario', JSON.stringify(obj));
-        sessionStorage.setItem('token', r.TOKEN);
-        location.href = 'index.html';
+        if (r.CODIGO === 200) {
+            const { TOKEN, LOGIN, NOMBRE, FOTO, ULTIMO_ACCESO } = r;
+            const obj = {
+                NOMBRE,
+                LOGIN,
+                FOTO,
+                TOKEN,
+                ULTIMO_ACCESO
+            };
+
+            sessionStorage.setItem('usuario', JSON.stringify(obj));
+            sessionStorage.setItem('token', r.TOKEN);
+            crearModalLogin(r);
+        } else {
+            crearModalError(r);
+        }
     };
 
     xhr.send(fd);
@@ -197,8 +211,11 @@ function postPublicacion(evt) {
     
 }
 
-function postComentario(frm, id) {
-    //const id = location.href.split('/');
+function postComentario(frm) {
+    //OBTENER EL ID DE LA PUBLICACION
+    const valores = location.search;
+    const urlParams = new URLSearchParams(valores);
+    const id = urlParams.get('id') || undefined;
     console.log(id);
 
     let xhr = new XMLHttpRequest(),
@@ -214,15 +231,11 @@ function postComentario(frm, id) {
         let r = xhr.response;
 
         if (r.CODIGO === 201) {
+            document.querySelector('form').reset();
+            crearModalComentario(r);
             //ANYADIR COMENTARIO POR HTML A LA LISTA
             actualizaComentarios(id);
-            const form = document.querySelector('form');
-            form.reset();
-            //MOSTRAR MENSAJE MODAL
-            
         }
-
-        console.log(r);
     };
     auth = usu.LOGIN + ':' + usu.TOKEN;
     xhr.setRequestHeader('Authorization', auth);
