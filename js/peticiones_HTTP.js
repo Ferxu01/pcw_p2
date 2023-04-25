@@ -200,41 +200,14 @@ function postRegistro(evt) {
 
     xhr.onload = () => {
         let r = xhr.response;
-
+        if(r.CODIGO === 201){
+            crearModalRegistro(r);
+        }
         console.log(r);
     };
 
     xhr.send(fd);
 }
-
-/* function postRegistro(evt) {
-    evt.preventDefault();
-    const frm = evt.currentTarget,
-        xhr = new XMLHttpRequest(),
-        url = 'api/usuarios/registro',
-        fd = new FormData(frm);
-    xhr.open('POST', url, true);
-    xhr.responseType = 'json';
-
-    xhr.onload = () => {
-        let r = xhr.response;
-        /* if (r.RESULTADO === 'OK') {
-            let dialogo = document.createElement('dialog'),
-                html = '';
-
-            html += `<p>Se ha registrado correctamente.</p><h3>Bienvenido ${r.LOGIN}</h3><button onclick="cerrarDialogo()">Iniciar sesión</button>`;
-
-            dialogo.innerHTML = html;
-
-            dialogo.style.cssText = 'height:auto;width:auto;position:relative;margin:auto;text-align:center;'
-
-            document.body.appendChild(dialogo);
-            dialogo.showModal();
-        }
-        console.log(r);
-    };
-    xhr.send(fd);
-} */
 
 function postPublicacion(evt) {
     

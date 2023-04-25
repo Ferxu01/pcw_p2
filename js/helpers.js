@@ -85,11 +85,12 @@ function checkAccesoPagina(pagina) {
         accesible = true;
     } else {
         //SELECCIONAR EL ARRAY POR EL QUE SE VA A BUSCAR PARA LA COMPROBACION
-        if (isLogged())
+        if (isLogged()){
             arrPaginas = paginasPermitidas.logged;
-        else
+        }
+        else{
             arrPaginas = paginasPermitidas.noLogged;
-
+        }
         arrPaginas.forEach(pag => {
             pag += '.html';
             if (pag === pagina)
@@ -346,16 +347,16 @@ async function realizaBusqueda(evt) {
     totalPags.textContent = Math.ceil(publicaciones.TOTAL_COINCIDENCIAS/publicaciones.LPAG); //REDONDEA HACIA ARRIBA PARA OBTENER LAS PAGINAS TOTALES
 
     if (parseInt(pagActual.textContent) === 1 && parseInt(totalPags.textContent) === 1) {
-        botonesPaginacion[0].setAttribute('disabled', true);
-        botonesPaginacion[1].setAttribute('disabled', true);
-        botonesPaginacion[2].setAttribute('disabled', true);
-        botonesPaginacion[3].setAttribute('disabled', true);
+        botonesPaginacion[0].removeAttribute('onclick');
+        botonesPaginacion[1].removeAttribute('onclick');
+        botonesPaginacion[2].removeAttribute('onclick');
+        botonesPaginacion[3].removeAttribute('onclick');
     } else {
         //DESHABILITAR BOTONES DE PAGINA ANTERIOR AL SER LA PRIMERA PAGINA MOSTRADA
         const btnPrimeraPag = botonesPaginacion[0];
         const btnPagAnterior = botonesPaginacion[1];
-        btnPrimeraPag.setAttribute('disabled', true);
-        btnPagAnterior.setAttribute('disabled', true);
+        btnPrimeraPag.removeAttribute('onclick');
+        btnPagAnterior.removeAttribute('onclick');
     }
 
 
@@ -367,7 +368,18 @@ function crearModalLogin(r) {
     modal.innerHTML = `
         <h3>Usuario ${r.LOGIN} logueado correctamente</h3>
         <p>Última vez conectado: ${r.ULTIMO_ACCESO}</p>
-        <button class="modal" onclick="cerrarModal({ redireccion: 'index' })">Cerrar</button>
+        <button class="modal" onclick="cerrarModal({ redireccion:'index'})">Cerrar</button>
+    `;
+
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+function crearModalRegistro(r) {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>Usuario ${r.LOGIN} registrado correctamente</h3>
+        <button class="modal" onclick="cerrarModal({ redireccion:'login'})">Cerrar</button>
     `;
 
     document.body.appendChild(modal);
