@@ -73,14 +73,13 @@
             <article id="fotos">
               <h3>Fotos</h3>
               <div class="foto">
-                <input type="file" accept="image/*" name="fotos[]" id="foto">
-                <label for="foto">
-                    <img src="images/no_foto.jpg" alt="imagen no hay foto">
-                </label>
+                <label for="examinar" id="msgImgSize"></label>
+                <label for="img"></label>
+                <img id="img" src="images/no_foto.jpg" onclick="this.parentElement.parentElement.querySelector('input[type=file]').click();" alt="imagen no hay foto">
 
                 <textarea name="descripciones[]" id="descripcion" cols="30" rows="10"></textarea>
-                <input class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
-                <button class="eliminar-foto">Eliminar foto</button>
+                <input id="img" onchange="mostrarFoto(this)" class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
+                <button type="button" onclick="eliminarFotoPub()" class="eliminar-foto">Eliminar foto</button>
               </div>
 
               <div class="control-imgs">
@@ -93,11 +92,6 @@
             <input type="submit" value="Enviar">
             <input type="reset" value="Limpiar">
           </form>
-          <!--<div class="control-imgs">
-                <div class="add-delete-btn">
-                  <button class="nueva-foto">Añadir foto</button>
-                </div>
-              </div>-->
     </section>
 
     <footer class="site-footer">
@@ -114,6 +108,7 @@
     <script src="js/peticiones_HTTP.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/nueva.js"></script>
+    <script src="js/registro.js"></script>
 </body>
 
 </html>

@@ -223,7 +223,7 @@ function postPublicacion(evt) {
     xhr.responseType = 'json';
 
     xhr.onload = () => {
-        let r = xhr.responseText;
+        let r = xhr.response;
 
         console.log(r);
     };

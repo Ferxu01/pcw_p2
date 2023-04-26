@@ -70,3 +70,8 @@ function eliminarFoto() {
     const img = document.getElementById("img");
     img.src = "images/empty_picture.png";
 }
+
+function eliminarFotoPub() {
+    const img = document.getElementById("img");
+    img.src = "images/no_foto.jpg";
+}
