@@ -210,7 +210,23 @@ function postRegistro(evt) {
 }
 
 function postPublicacion(evt) {
+    evt.preventDefault();
     
+    const frm = evt.currentTarget,
+        xhr = new XMLHttpRequest(),
+        url = 'api/publicaciones',
+        fd = new FormData(frm);
+    
+    xhr.open('POST', url, true);
+    xhr.responseType = 'json';
+
+    xhr.onload = () => {
+        let r = xhr.response;
+
+        console.log(r);
+    };
+
+    xhr.send(fd);
 }
 
 

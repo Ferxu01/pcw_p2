@@ -56,7 +56,7 @@
     </nav>
 
     <section>
-        <form id="nuevo">
+        <form id="nuevo" onsubmit="postPublicacion(event)">
             <h2>Añadir nueva noticia</h2>
             <label for="titulo">Título</label>
             <input class="newTitle" type="text" id="titulo" name="titulo" maxlength="200" autofocus required>
@@ -73,17 +73,19 @@
             <article id="fotos">
               <h3>Fotos</h3>
               <div class="foto">
-                <input type="file" accept="image/*" name="foto" id="foto">
+                <input type="file" accept="image/*" name="fotos[]" id="foto">
                 <label for="foto">
                     <img src="images/no_foto.jpg" alt="imagen no hay foto">
                 </label>
-                <div class="control-imgs">
-                  <input class="seleccionar-foto" type="file" accept="image/*">
-                  <br>
-                  <div class="add-delete-btn">
-                    <button class="nueva-foto">Añadir foto</button>
-                    <button class="eliminar-foto">Eliminar foto</button>
-                  </div>
+
+                <textarea name="descripciones[]" id="descripcion" cols="30" rows="10"></textarea>
+                <input class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
+                <button class="eliminar-foto">Eliminar foto</button>
+              </div>
+
+              <div class="control-imgs">
+                <div class="add-delete-btn">
+                  <button class="nueva-foto">Añadir foto</button>
                 </div>
               </div>
             </article>
