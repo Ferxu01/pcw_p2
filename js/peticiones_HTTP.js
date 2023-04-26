@@ -215,16 +215,20 @@ function postPublicacion(evt) {
     const frm = evt.currentTarget,
         xhr = new XMLHttpRequest(),
         url = 'api/publicaciones',
-        fd = new FormData(frm);
+        fd = new FormData(frm),
+        usu = getUserData();
+    let auth;
     
     xhr.open('POST', url, true);
     xhr.responseType = 'json';
 
     xhr.onload = () => {
-        let r = xhr.response;
+        let r = xhr.responseText;
 
         console.log(r);
     };
+    auth = usu.LOGIN + ':' + usu.TOKEN;
+    xhr.setRequestHeader('Authorization', auth);
 
     xhr.send(fd);
 }

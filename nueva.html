@@ -65,7 +65,7 @@
             <textarea class="newText" id="texto" name="texto" required></textarea>
       
             <label for="ubicacion">Ubicación</label>
-            <input class="newLoc" type="text" id="ubicacion" name="ubicacion" list="ubicaciones" maxlength="100" required>
+            <input class="newLoc" type="text" id="zona" name="zona" list="ubicaciones" maxlength="100" required>
             <datalist id="ubicaciones">
               
             </datalist>
@@ -85,7 +85,7 @@
 
               <div class="control-imgs">
                 <div class="add-delete-btn">
-                  <button class="nueva-foto">Añadir foto</button>
+                  <button type="button" onclick="return;" class="nueva-foto">Añadir foto</button>
                 </div>
               </div>
             </article>
@@ -93,6 +93,11 @@
             <input type="submit" value="Enviar">
             <input type="reset" value="Limpiar">
           </form>
+          <!--<div class="control-imgs">
+                <div class="add-delete-btn">
+                  <button class="nueva-foto">Añadir foto</button>
+                </div>
+              </div>-->
     </section>
 
     <footer class="site-footer">
