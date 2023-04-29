@@ -64,7 +64,7 @@
             <label for="texto">Texto</label>
             <textarea class="newText" id="texto" name="texto" required></textarea>
       
-            <label for="ubicacion">Ubicación</label>
+            <label>Ubicación</label>
             <input class="newLoc" type="text" id="zona" name="zona" list="ubicaciones" maxlength="100" required>
             <datalist id="ubicaciones">
               
@@ -73,12 +73,12 @@
             <article id="fotos">
               <h3>Fotos</h3>
               <div class="foto">
-                <label for="examinar" id="msgImgSize"></label>
-                <label for="img"></label>
+                <label id="msgImgSize"></label>
+                <label></label>
                 <img id="img" src="images/no_foto.jpg" onclick="this.parentElement.parentElement.querySelector('input[type=file]').click();" alt="imagen no hay foto">
 
                 <textarea name="descripciones[]" id="descripcion" cols="30" rows="10"></textarea>
-                <input id="img" onchange="mostrarFoto(this)" class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
+                <input onchange="mostrarFoto(this)" class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
                 <button type="button" onclick="eliminarFotoPub()" class="eliminar-foto">Eliminar foto</button>
               </div>
 

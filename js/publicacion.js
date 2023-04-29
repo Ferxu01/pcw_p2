@@ -80,6 +80,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 divComments.innerHTML += '<hr>';
             });
 
+            //SERIALIZAR EL VALOR DE LA ZONA PARA REALIZAR LA BUSQUEDA
+            const zonaSerializada = encodeURIComponent(publicacion.nombreZona);
+
             //CREAR LA PÁGINA DE LA PUBLICACION CON SUS DATOS
             const section = document.querySelector('section');
             section.innerHTML += `
@@ -88,7 +91,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <article class="publish-container">
                     <div class="publish-body">
                         <p class="publish-descrip">${publicacion.texto}</p>
-                        <p>Ubicación: <a href="buscar.html?z=${publicacion.nombreZona}">${publicacion.nombreZona}</a></p>
+                        <p>Ubicación: <a href="buscar.html?z=${zonaSerializada}">${publicacion.nombreZona}</a></p>
                     </div>
                     <hr>
 
@@ -103,8 +106,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
 
                         <div class="likes-info">
-                            <button onclick="postMeGusta(${idPub})" id="like" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/like-icon.svg" alt="icono like"> Me gusta (<span class="numLikes">${publicacion.nMeGusta}</span>)</button> <br>
-                            <button onclick="postNoMeGusta(${idPub})" id="dislike" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/dislike-icon.svg" alt="icono dislike"> No me gusta (<span class="numDislikes">${publicacion.nNoMeGusta}</span>)</button>
+                            <button type="button" onclick="postMeGusta(${idPub})" id="like" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/like-icon.svg" alt="icono like"> Me gusta (<span class="numLikes">${publicacion.nMeGusta}</span>)</button> <br>
+                            <button type="button" onclick="postNoMeGusta(${idPub})" id="dislike" class="btn-valoracion"> <img class="sm-icon-height" src="images/icons/svg/dislike-icon.svg" alt="icono dislike"> No me gusta (<span class="numDislikes">${publicacion.nNoMeGusta}</span>)</button>
                         </div>
                         <div class="comments-info">
                             <img class="sm-icon-height" src="images/icons/svg/comment-icon.svg" alt="comment icon">
@@ -144,7 +147,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 //DESHABILITAR BOTONES DE ME GUSTA Y NO ME GUSTA
                 const botones = document.querySelectorAll('button.btn-valoracion');
                 botones.forEach(btn => {
-                    btn.setAttribute('disabled', true);
+                    btn.disabled = true;
+                    //btn.setAttribute('disabled', true);
                     btn.classList.add('disabled'); //EFECTO VISUAL DE BOTON DESHABILITADO
                 });
             } else {
@@ -160,12 +164,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         
                 if (publicacion.meGusta === 1) { //USUARIO TIENE UN LIKE
                     btnDislike.classList.add('disabled');
-                    btnDislike.setAttribute('disabled', true);
+                    //btnDislike.setAttribute('disabled', true);
+                    btnDislike.disabled = true;
         
                 } else if (publicacion.meGusta === 0) { //USUARIO TIENE UN DISLIKE
                     btnLike.classList.add('disabled');
-                    btnLike.setAttribute('disabled', true);
-        
+                    //btnLike.setAttribute('disabled', true);
+                    btnLike.disabled = true;
                 }
             }
 

@@ -72,8 +72,8 @@ function isLogged() {
 
 function checkAccesoPagina(pagina) {
     const paginasPermitidas = {
-        logged: ['index', 'buscar', 'nueva'], //PAGINAS ACCESIBLES SI LOGUEADO
-        noLogged: ['index', 'buscar', 'login', 'registro'] //PAGINAS ACCESIBLES SI NO LOGUEADO
+        logged: ['index', 'buscar', 'nueva', 'acerca'], //PAGINAS ACCESIBLES SI LOGUEADO
+        noLogged: ['index', 'buscar', 'login', 'registro', 'acerca'] //PAGINAS ACCESIBLES SI NO LOGUEADO
     };
     let accesible = false;
     let arrPaginas = null;
