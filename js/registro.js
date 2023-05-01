@@ -16,8 +16,8 @@ async function checkLogin() {
                     loginMsg.textContent = "";
                     submitBtn.disabled = false;
                 }
-            }).catch((error) => {
-                console.error("ERROR PROMESA");
+            }).catch(err => {
+                console.error(err);
             });
     }
     return loginDisponible;
@@ -43,7 +43,8 @@ async function compararPassword() {
 function mostrarFoto(inp) {
     const fichero = inp.files[0],
     imgSizeMsg = document.getElementById('msgImgSize'),
-        img = document.getElementById('img');
+        img = document.getElementById('img'),
+        fotoDefault = "images/empty_picture.png";
 
         if(img.src !== ""){
             eliminarFoto();
@@ -54,24 +55,48 @@ function mostrarFoto(inp) {
                     imgSizeMsg.style.cssText = "color:red; float:right; margin-right:30px";
                     imgSizeMsg.textContent = "La imagen es demasiado grande (más de 300KB)";
                     inp.value = ""; // Limpiar el input
-                    img.src = "images/empty_picture.png"; // Mostrar la imagen por defecto
+                    img.src = fotoDefault; // Mostrar la imagen por defecto
                 } else {
                     img.src = URL.createObjectURL(fichero); // Leer el archivo y convertirlo a base64
                     imgSizeMsg.textContent = "";
                 }
             } else {
-                img.src = "images/empty_picture.png"; // Mostrar la imagen por defecto
+                img.src = fotoDefault; // Mostrar la imagen por defecto
             }
         }
-    console.log(`foto: ${img.src}`);
+}
+
+function mostrarFotoPub(inp) {
+    const fichero = inp.files[0],
+    imgSizeMsg = document.getElementsByClassName('msgImgSize')[0],
+        fotoDefault = "images/no_foto.jpg";
+
+        let img = inp.parentElement.querySelector('img');
+
+            if (inp.files && fichero) {
+                var fileSize = fichero.size; // Tamaño del archivo en bytes
+        
+                if (fileSize > 300000) { // 300KB en bytes
+                    imgSizeMsg.style.cssText = "color:red; float:right; margin-right:30px";
+                    imgSizeMsg.textContent = "La imagen es demasiado grande (más de 300KB)";
+                    inp.value = ""; // Limpiar el input
+                    img.src = fotoDefault; // Mostrar la imagen por defecto
+                } else {
+                    img.src = URL.createObjectURL(fichero); // Leer el archivo y convertirlo a base64
+                    imgSizeMsg.textContent = "";
+                }
+            } else {
+                img.src = fotoDefault; // Mostrar la imagen por defecto
+            }
 }
 
 function eliminarFoto() {
-    const img = document.getElementById("img");
-    img.src = "images/empty_picture.png";
+    const img = document.getElementById("img"),
+    fotoDefault = "images/empty_picture.png";;
+    img.src = fotoDefault;
 }
 
-function eliminarFotoPub() {
-    const img = document.getElementById("img");
-    img.src = "images/no_foto.jpg";
+function eliminarFotoPub(btn) {
+    let divFoto = btn.parentElement;
+    divFoto.remove();
 }

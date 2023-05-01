@@ -59,8 +59,6 @@ function getPublicaciones() {
 function getPublicacionesFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina }) {
     //Obtener la url a partir de los datos del filtrado
     const url = prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, registrosPorPagina });
-
-    console.log(url);
     
     return new Promise((resolve, reject) => {
         let xhr = new XMLHttpRequest();
@@ -179,8 +177,6 @@ function postLogout() {
             clearSessionData();
             location.href = 'index.html';
         }
-
-        console.log(r);
     };
     auth = usu.LOGIN + ':' + usu.TOKEN;
     xhr.setRequestHeader('Authorization', auth);
@@ -203,7 +199,6 @@ function postRegistro(evt) {
         if(r.CODIGO === 201){
             crearModalRegistro(r);
         }
-        console.log(r);
     };
 
     xhr.send(fd);
@@ -218,19 +213,20 @@ function postPublicacion(evt) {
         fd = new FormData(frm),
         usu = getUserData();
     let auth;
-    
+
     xhr.open('POST', url, true);
     xhr.responseType = 'json';
 
     xhr.onload = () => {
         let r = xhr.response;
-
-        console.log(r);
+        if (r.CODIGO === 201) {
+            crearModalPublicacion(r);
+        }
     };
     auth = usu.LOGIN + ':' + usu.TOKEN;
     xhr.setRequestHeader('Authorization', auth);
 
-    xhr.send(fd);
+    xhr.send(fd); 
 }
 
 
@@ -239,7 +235,6 @@ function postComentario(frm) {
     const valores = location.search;
     const urlParams = new URLSearchParams(valores);
     const id = urlParams.get('id') || undefined;
-    console.log(id);
 
     let xhr = new XMLHttpRequest(),
         url = `api/publicaciones/${id}/comentarios`,
@@ -290,7 +285,6 @@ function postMeGusta(id) {
                 btnDislike.setAttribute('disabled', true);
             }
 
-            console.log(r);
             resolve(r);
         };
         auth = usu.LOGIN + ':' + usu.TOKEN;
@@ -323,7 +317,6 @@ function postNoMeGusta(id) {
                 btnLike.setAttribute('disabled', true);
             }
 
-            console.log(r);
             resolve(r);
         };
         auth = usu.LOGIN + ':' + usu.TOKEN;

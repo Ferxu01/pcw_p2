@@ -40,13 +40,16 @@
                 <a href="buscar.html"><span>Buscar</span><img src="images/icons/search-icon.png" alt="search-icon"></a>
             </li>
             <li>
-                <a href="nueva.html"><span class="nueva">Nueva</span><img src="images/icons/new-icon.png" alt="new-icon"></a>
+                <a href="nueva.html"><span class="nueva">Nueva</span><img src="images/icons/new-icon.png"
+                        alt="new-icon"></a>
             </li>
             <li>
-                <a onclick="postLogout()"><span class="logout">Logout</span><img src="images/icons/logout-icon.png" alt="logout-icon"></a>
+                <a onclick="postLogout()"><span class="logout">Logout</span><img src="images/icons/logout-icon.png"
+                        alt="logout-icon"></a>
             </li>
             <li>
-                <a href="login.html"><span class="login">Login</span><img src="images/icons/login-icon.png" alt="login-icon"></a>
+                <a href="login.html"><span class="login">Login</span><img src="images/icons/login-icon.png"
+                        alt="login-icon"></a>
             </li>
             <li>
                 <a href="registro.html"><span class="registro">Registro</span><img src="images/icons/register-icon.png"
@@ -60,38 +63,29 @@
             <h2>Añadir nueva noticia</h2>
             <label for="titulo">Título</label>
             <input class="newTitle" type="text" id="titulo" name="titulo" maxlength="200" autofocus required>
-      
+
             <label for="texto">Texto</label>
             <textarea class="newText" id="texto" name="texto" required></textarea>
-      
+
             <label>Ubicación</label>
             <input class="newLoc" type="text" id="zona" name="zona" list="ubicaciones" maxlength="100" required>
             <datalist id="ubicaciones">
-              
+
             </datalist>
-      
+
             <article id="fotos">
-              <h3>Fotos</h3>
-              <div class="foto">
-                <label id="msgImgSize"></label>
-                <label></label>
-                <img id="img" src="images/no_foto.jpg" onclick="this.parentElement.parentElement.querySelector('input[type=file]').click();" alt="imagen no hay foto">
+                <h3>Fotos</h3>
+            </article> 
 
-                <textarea name="descripciones[]" id="descripcion" cols="30" rows="10"></textarea>
-                <input onchange="mostrarFoto(this)" class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
-                <button type="button" onclick="eliminarFotoPub()" class="eliminar-foto">Eliminar foto</button>
-              </div>
-
-              <div class="control-imgs">
+            <div class="control-imgs">
                 <div class="add-delete-btn">
-                  <button type="button" onclick="return;" class="nueva-foto">Añadir foto</button>
+                    <button type="button" onclick="addFotoPub()" class="nueva-foto">Añadir foto</button>
                 </div>
-              </div>
-            </article>
-      
-            <input type="submit" value="Enviar">
+            </div>
+
+            <input type="submit" value="Enviar" id="submit">
             <input type="reset" value="Limpiar">
-          </form>
+        </form>
     </section>
 
     <footer class="site-footer">

@@ -45,6 +45,7 @@ section#fotos {
 .foto {
     display: inline-block;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .foto img {
@@ -86,7 +87,8 @@ div.add-delete-btn > button {
     padding: 10px 20px;
     font-size: 12px;
     cursor: pointer;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .control-imgs > .add-delete-btn > .eliminar-foto,

@@ -3,7 +3,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const publicaciones = await getPublicacionesFiltro({ registrosPorPagina: 6, pagina: 0 }); //LA PAGINA 0 ES LA PRIMERA PAGINA
 
-    console.log(publicaciones);
     creaPublicaciones(publicaciones);
 
     const botonesPaginacion = document.getElementsByTagName('button');

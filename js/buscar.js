@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     //OBTENER URL Y OBTENER LOS ARGUMENTOS SI LOS HUBIERA
     const valores = location.search;
     const urlParams = new URLSearchParams(valores);
-    console.log(urlParams);
 
     if (urlParams.size > 0) {
         const zona = urlParams.get('z');

@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     } else {
         //HACER PETICION AL SERVIDOR PARA OBTENER LOS DATOS
         const respData = await getPublicacion(idPub);
-        console.log(respData);
         const publicacion = respData.FILAS[0];
         
         if (!publicacion) {
@@ -160,7 +159,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const btnDislike = document.querySelector('button#dislike');
                 const respData = await getPublicacion(idPub);
                 const publicacion = respData.FILAS[0];
-                console.log(publicacion);
         
                 if (publicacion.meGusta === 1) { //USUARIO TIENE UN LIKE
                     btnDislike.classList.add('disabled');

@@ -1,12 +1,12 @@
 function formateaFecha(fecha) {
     const nuevaFecha = new Date(fecha);
-    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    const diasSemana = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"]; const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
 
     const diaSemana = diasSemana[nuevaFecha.getDay()];
     const dia = nuevaFecha.getDate();
     const mes = meses[nuevaFecha.getMonth()];
     const anyo = nuevaFecha.getFullYear();
-    
+
     const fechaFormateada = `${diaSemana}, ${dia} de ${mes} de ${anyo}`;
     //Formato: lunes, 18 de febrero de 2023
     return fechaFormateada;
@@ -28,7 +28,7 @@ function prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, regist
         } else
             urlPeticion += `&t=${titulo}`;
     }
-    
+
     if (zona) {
         if (!existeParametro) {
             urlPeticion += `?z=${zona}`;
@@ -62,7 +62,7 @@ function prepareUrlFiltro({ titulo, zona, fechaDesde, fechaHasta, pagina, regist
         } else
             urlPeticion += `&pag=${pagina}&lpag=${registrosPorPagina}`;
     }
-    
+
     return urlPeticion;
 }
 
@@ -80,15 +80,15 @@ function checkAccesoPagina(pagina) {
 
     //COMPROBAR SI ES LA PAGINA PUBLICACION, QUE PUEDEN ACCEDER LOGUEADOS Y NO LOGUEADOS
     //ES UNA SITUACION ESPECIAL EN LA PAGINA WEB
-    if (location.href.split('/').pop().includes('publicacion') 
+    if (location.href.split('/').pop().includes('publicacion')
         || location.href.split('/').pop().includes('buscar')) {
         accesible = true;
     } else {
         //SELECCIONAR EL ARRAY POR EL QUE SE VA A BUSCAR PARA LA COMPROBACION
-        if (isLogged()){
+        if (isLogged()) {
             arrPaginas = paginasPermitidas.logged;
         }
-        else{
+        else {
             arrPaginas = paginasPermitidas.noLogged;
         }
         arrPaginas.forEach(pag => {
@@ -136,9 +136,9 @@ async function actualizaPaginacion(evt) {
     let totalPags = document.getElementsByClassName('totalPags')[0];
 
     const botonesPaginacion = document.getElementsByTagName('button');
-    
+
     if (parseInt(pagActual.textContent) === 1 && parseInt(totalPags.textContent) === 1) {
-        
+
         botonesPaginacion.forEach(boton => {
             boton.setAttribute('disabled', true);
         });
@@ -154,14 +154,14 @@ async function actualizaPaginacion(evt) {
             //DESHABILITAR BOTONES ANTERIOR Y PRIMERA PAGINA
             botonesPaginacion[0].removeAttribute('onclick');
             botonesPaginacion[1].removeAttribute('onclick');
-            
+
             botonesPaginacion[2].setAttribute('onclick', 'actualizaPaginacion(event)');
             botonesPaginacion[3].setAttribute('onclick', 'actualizaPaginacion(event)');
 
-            
+
         } else if (evt.target.id === 'btnAnteriorPag') {
             pagActual.textContent--;
-            paginaPeticion = parseInt(pagActual.textContent)-1; //CALCULAR NUM PAGINA PARA LA PETICION
+            paginaPeticion = parseInt(pagActual.textContent) - 1; //CALCULAR NUM PAGINA PARA LA PETICION
 
             botonesPaginacion[2].setAttribute('onclick', 'actualizaPaginacion(event)');
             botonesPaginacion[3].setAttribute('onclick', 'actualizaPaginacion(event)');
@@ -181,11 +181,11 @@ async function actualizaPaginacion(evt) {
                 botonesPaginacion[2].removeAttribute('onclick');
                 botonesPaginacion[3].removeAttribute('onclick');
             }
-            
+
 
         } else if (evt.target.id === 'btnUltimaPag') {
             pagActual.textContent = parseInt(totalPags.textContent);
-            paginaPeticion = parseInt(totalPags.textContent)-1;
+            paginaPeticion = parseInt(totalPags.textContent) - 1;
 
             botonesPaginacion[0].setAttribute('onclick', 'actualizaPaginacion(event)');
             botonesPaginacion[1].setAttribute('onclick', 'actualizaPaginacion(event)');
@@ -206,8 +206,6 @@ async function actualizaPaginacion(evt) {
             registrosPorPagina: parseInt(urlParams.get('lpag')) || 6
         };
 
-        console.log(parametrosPeticion);
-
         const publicaciones = await getPublicacionesFiltro(parametrosPeticion);//LA PAGINA 0 ES LA PRIMERA PAGINA
 
         //LIMPIAR LAS PUBLICACIONES ANTERIORES
@@ -217,20 +215,20 @@ async function actualizaPaginacion(evt) {
     }
 
 
-    
+
 }
 
 async function actualizaComentarios(id) {
     const numComentarios = document.querySelector('span.numComments');
     const article = document.querySelector('article.comments');
-    
+
     const res = await getComentariosPublicacion(id);
     let comentarios = res.FILAS;
 
     //CREAR LA ESTRUCTURA DE LOS COMENTARIOS
     const divComments = document.createElement('div');
     divComments.classList.add('comments-container');
-        
+
     comentarios.forEach(comentario => {
         const userComment = document.createElement('div');
         userComment.classList.add('user-comment');
@@ -249,7 +247,7 @@ async function actualizaComentarios(id) {
         const htmlFecha = `
             <div class="comment-date">
                 <img class="md-icon-height" src="images/icons/svg/calendar-icon.svg" alt="icono calendario">
-                <span>${comentario.fechaHora}</span>
+                <span>${formateaFecha(comentario.fechaHora)}</span>
             </div>
         `;
         divUserAvatar.appendChild(imgAvatar);
@@ -286,7 +284,7 @@ function creaPublicaciones(publicaciones) {
     (publicaciones.FILAS).forEach(pub => {
         const publicacion = document.createElement('article');
         publicacion.classList.add('notice-container');
-        
+
         const headerLink = document.createElement('a');
         headerLink.href = `publicacion.html?id=${pub.id}`;
         headerLink.text = pub.titulo;
@@ -299,7 +297,7 @@ function creaPublicaciones(publicaciones) {
         imgLink.href = `publicacion.html?id=${pub.id}`;
 
         const pubImg = document.createElement('img');
-        pubImg.src = '/pcw/practica2/fotos/pubs/'+pub.imagen;
+        pubImg.src = '/pcw/practica2/fotos/pubs/' + pub.imagen;
         pubImg.alt = 'Foto noticia';
         imgLink.appendChild(pubImg);
 
@@ -333,18 +331,17 @@ async function realizaBusqueda(evt) {
 
     //LLAMAR AL SERVICIO DE BUSQUEDA DE PUBLICACIONES FILTRADAS
     const publicaciones = await getPublicacionesFiltro({ titulo, fechaDesde, fechaHasta, zona, registrosPorPagina: 6, pagina: 0 });
-    console.log(publicaciones);
 
     //LIMPIAR LAS PUBLICACIONES ANTERIORES
     document.querySelector('div#notices').innerHTML = '';
 
     creaPublicaciones(publicaciones);
-    
+
     const botonesPaginacion = document.getElementsByTagName('button');
     let pagActual = document.getElementsByClassName('pagActual')[0];
     let totalPags = document.getElementsByClassName('totalPags')[0];
     pagActual.textContent = 1; //AL INICIAR LA PAGINA SIEMPRE EMPIEZA POR LA PRIMERA PAGINA
-    totalPags.textContent = Math.ceil(publicaciones.TOTAL_COINCIDENCIAS/publicaciones.LPAG); //REDONDEA HACIA ARRIBA PARA OBTENER LAS PAGINAS TOTALES
+    totalPags.textContent = Math.ceil(publicaciones.TOTAL_COINCIDENCIAS / publicaciones.LPAG); //REDONDEA HACIA ARRIBA PARA OBTENER LAS PAGINAS TOTALES
 
     if (parseInt(pagActual.textContent) === 1 && parseInt(totalPags.textContent) === 1) {
         botonesPaginacion[0].removeAttribute('onclick');
@@ -386,6 +383,37 @@ function crearModalRegistro(r) {
     modal.showModal();
 }
 
+function crearModalPublicacion(r) {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>Se ha guardado correctamente la publicación: "${r.TITULO}"</h3>
+        <button class="modal" onclick="cerrarModal({ redireccion:'login'})">Cerrar</button>
+    `;
+
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+function crearModalNoFoto() {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>Necesitas seleccionar una imagen para poder publicar una noticia.</h3>
+        <button class="modal" onclick="cerrarModal({})">Cerrar</button>
+    `;
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
+function crearModalNoFotoAnterior() {
+    let modal = creaPropiedadesModal();
+    modal.innerHTML = `
+        <h3>Para añadir otra foto, debes subir una foto en el campo anterior.</h3>
+        <button class="modal" onclick="cerrarModal({})">Cerrar</button>
+    `;
+    document.body.appendChild(modal);
+    modal.showModal();
+}
+
 function crearModalComentario(r) {
     let modal = creaPropiedadesModal();
     modal.innerHTML = `
@@ -418,17 +446,57 @@ function creaPropiedadesModal() {
     dialogo.style.left = '50%';
     dialogo.style.transform = 'translate(-50%, -50%)';
     return dialogo;
-  }
+}
 
 function cerrarModal({ redireccion, focus }) {
     document.querySelector('dialog').close();
     document.querySelector('dialog').remove();
-    
+
     if (redireccion) { //REDIRECCIONAR A LA PAGINA, SI SE QUIERE
         location.href = `${redireccion}.html`;
     }
 
     if (focus) { //COLOCAR FOCO DE NUEVO, SI SE QUIERE
         document.getElementById(focus).focus();
+    }
+}
+
+function cargarFotoPub(btn) {
+    let div = btn.parentElement;
+
+    div.querySelector('input[type="file"]').click();
+}
+
+function addFotoPub() {
+    let articulo = document.querySelector('article#fotos'),
+        divCreado = document.querySelector('div.foto'),
+        htmlDiv = `<div class="foto">
+                    <label class="msgImgSize"></label>
+                    <img class="img" src="images/no_foto.jpg"
+                        onclick="cargarFotoPub(this)" alt="imagen no hay foto">
+                    <textarea name="descripciones[]" cols="30" rows="10"></textarea>
+                    <input onchange="mostrarFotoPub(this)" class="seleccionar-foto" type="file" name="fotos[]" accept="image/*">
+                    <button type="button" onclick="cargarFotoPub(this)" class="cargar-foto">Cargar foto</button>
+                    <button type="button" onclick="eliminarFotoPub(this)" class="eliminar-foto">Eliminar foto</button>
+                </div>`;
+
+    if (divCreado !== null) {
+        let imgArray = divCreado.parentElement.querySelectorAll('img.img'),
+            fotoSubida = false;
+        imgArray.forEach(element => {
+            if (element.src === "http://localhost/pcw/practica2/images/no_foto.jpg") {
+                fotoSubida = false;
+            } else {
+                fotoSubida = true;
+            }
+        });
+        
+        if (!fotoSubida) {
+            crearModalNoFotoAnterior();
+        } else {
+            articulo.innerHTML += htmlDiv;
+        }
+    } else {
+        articulo.innerHTML += htmlDiv;
     }
 }
